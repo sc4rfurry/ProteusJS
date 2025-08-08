@@ -6,8 +6,8 @@
 
 *Shape-shifting responsive design that adapts like the sea god himself*
 
-[![npm version](https://img.shields.io/npm/v/@sc4rfurry/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurry/proteusjs)
-[![npm downloads](https://img.shields.io/npm/dm/@sc4rfurry/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurry/proteusjs)
+[![npm version](https://img.shields.io/npm/v/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
+[![npm downloads](https://img.shields.io/npm/dm/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
 [![GitHub stars](https://img.shields.io/github/stars/sc4rfurry/ProteusJS.svg?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS/stargazers)
 [![GitHub license](https://img.shields.io/github/license/sc4rfurry/ProteusJS.svg?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS/blob/main/LICENSE)
 
@@ -68,22 +68,22 @@ ProteusJS is a comprehensive TypeScript library that revolutionizes web developm
 
 ```bash
 # npm
-npm install @sc4rfurry/proteusjs
+npm install @sc4rfurryx/proteusjs
 
 # yarn
-yarn add @sc4rfurry/proteusjs
+yarn add @sc4rfurryx/proteusjs
 
 # pnpm
-pnpm add @sc4rfurry/proteusjs
+pnpm add @sc4rfurryx/proteusjs
 
 # CDN (for quick testing)
-<script src="https://unpkg.com/@sc4rfurry/proteusjs@latest/dist/proteus.min.js"></script>
+<script src="https://unpkg.com/@sc4rfurryx/proteusjs@latest/dist/proteus.min.js"></script>
 ```
 
 ### ⚡ **Basic Usage**
 
 ```typescript
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 // Initialize ProteusJS
 const proteus = new ProteusJS();
@@ -130,7 +130,7 @@ proteus.enableAccessibility(document.body, {
     </div>
 
     <script type="module">
-        import { ProteusJS } from '@sc4rfurry/proteusjs';
+        import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
         const proteus = new ProteusJS();
         proteus.autoOptimize(document.body, {
@@ -386,7 +386,7 @@ proteus.enableAccessibility('.chart', {
 
 ```tsx
 import { useEffect, useRef } from 'react';
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 function ResponsiveComponent() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -418,7 +418,7 @@ function ResponsiveComponent() {
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 const container = ref();
 let proteus;
@@ -443,7 +443,7 @@ onUnmounted(() => {
 
 ```typescript
 import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 @Component({
   selector: 'app-responsive',

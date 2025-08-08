@@ -171,7 +171,7 @@ See how to integrate ProteusJS with popular frameworks:
 #### React
 ```tsx
 import { useEffect, useRef } from 'react';
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 function ResponsiveGrid() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -203,7 +203,7 @@ function ResponsiveGrid() {
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 const gridRef = ref();
 let proteus;

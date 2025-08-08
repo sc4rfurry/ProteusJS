@@ -5,7 +5,7 @@
 ### Installation & Initialization
 
 ```typescript
-import { ProteusJS } from '@sc4rfurry/proteusjs';
+import { ProteusJS } from '@sc4rfurryx/proteusjs';
 
 // Initialize ProteusJS
 const proteus = new ProteusJS(options?);
@@ -364,7 +364,7 @@ proteus.autoOptimize(document.body, {
 ### React Hooks
 
 ```typescript
-import { useProteusContainer, useFluidType, useAccessibility } from '@sc4rfurry/proteusjs/react';
+import { useProteusContainer, useFluidType, useAccessibility } from '@sc4rfurryx/proteusjs/react';
 
 // Container hook
 const containerRef = useProteusContainer({
@@ -388,7 +388,7 @@ const accessibleRef = useAccessibility({
 ### Vue Composables
 
 ```typescript
-import { useProteusContainer, useFluidType } from '@sc4rfurry/proteusjs/vue';
+import { useProteusContainer, useFluidType } from '@sc4rfurryx/proteusjs/vue';
 
 // In setup()
 const { containerRef } = useProteusContainer({
