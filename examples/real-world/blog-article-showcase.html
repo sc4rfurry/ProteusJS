@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS Blog Article Showcase - Fluid Typography & Accessibility</title>
+    <meta name="description" content="Demonstration of ProteusJS fluid typography, reading time estimation, and cognitive accessibility features">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Article header */
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .article-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .reading-time {
+            background: #e3f2fd;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+        
+        .accessibility-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .controls-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            min-width: 120px;
+        }
+        
+        .control-group input,
+        .control-group select,
+        .control-group button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .control-group button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .control-group button:hover {
+            background: #0056b3;
+        }
+        
+        .control-group button.active {
+            background: #28a745;
+        }
+        
+        /* Article content */
+        .article-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content h2 {
+            color: #2c3e50;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .article-content h3 {
+            color: #34495e;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #555;
+            background: #f8f9fa;
+            padding: 1.5rem 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content code {
+            background: #f1f3f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Simplified content styles */
+        .simplified .article-content {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .simplified .article-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+        
+        .simplified .article-content h2,
+        .simplified .article-content h3 {
+            font-size: 1.3rem;
+            margin: 1rem 0;
+        }
+        
+        .simplified .complex-sentence {
+            display: none;
+        }
+        
+        .simplified .simple-sentence {
+            display: block;
+        }
+        
+        .complex-sentence {
+            display: block;
+        }
+        
+        .simple-sentence {
+            display: none;
+        }
+        
+        /* Typography metrics */
+        .typography-metrics {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Accessibility indicators */
+        .accessibility-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .indicator-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .indicator-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .indicator-status.pass {
+            background: #28a745;
+        }
+        
+        .indicator-status.fail {
+            background: #dc3545;
+        }
+        
+        .indicator-status.warning {
+            background: #ffc107;
+        }
+        
+        /* Skip links for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+        /* Focus indicators */
+        button:focus,
+        select:focus,
+        input:focus {
+            outline: 3px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        /* High contrast mode */
+        .high-contrast {
+            background: #000;
+            color: #fff;
+        }
+        
+        .high-contrast .article-content,
+        .high-contrast .accessibility-controls,
+        .high-contrast .typography-metrics {
+            background: #222;
+            color: #fff;
+        }
+        
+        .high-contrast .control-group input,
+        .high-contrast .control-group select {
+            background: #333;
+            color: #fff;
+            border-color: #555;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .accessibility-indicator {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="accessibility-indicator">
+        <div class="indicator-item">
+            <div class="indicator-status pass"></div>
+            <span>WCAG AA</span>
+        </div>
+        <div class="indicator-item">
+            <div class="indicator-status pass"></div>
+            <span>Screen Reader</span>
+        </div>
+        <div class="indicator-item">
+            <div class="indicator-status pass"></div>
+            <span>Keyboard Nav</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header class="article-header">
+            <h1 class="article-title">The Future of Responsive Web Design: Container Queries and Accessibility</h1>
+            <div class="article-meta">
+                <span>By ProteusJS Team</span>
+                <span>•</span>
+                <span>March 15, 2024</span>
+                <span>•</span>
+                <span class="reading-time" data-reading-time>8 min read</span>
+            </div>
+        </header>
+        
+        <div class="accessibility-controls">
+            <h2 class="controls-title">Accessibility & Reading Controls</h2>
+            <div class="control-group">
+                <label for="font-size">Font Size:</label>
+                <input type="range" id="font-size" min="14" max="24" value="16">
+                <span id="font-size-display">16px</span>
+            </div>
+            <div class="control-group">
+                <label for="line-height">Line Height:</label>
+                <input type="range" id="line-height" min="1.2" max="2.0" step="0.1" value="1.6">
+                <span id="line-height-display">1.6</span>
+            </div>
+            <div class="control-group">
+                <label for="reading-level">Reading Level:</label>
+                <select id="reading-level">
+                    <option value="standard">Standard</option>
+                    <option value="simplified">Simplified</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Display Mode:</label>
+                <button id="toggle-contrast" type="button">High Contrast</button>
+                <button id="toggle-simplified" type="button">Simplified View</button>
+            </div>
+        </div>
+        
+        <main id="main-content">
+            <article class="article-content">
+                <h2>Introduction to Modern Web Design</h2>
+                <p>
+                    <span class="complex-sentence">The landscape of web development has undergone a revolutionary transformation with the introduction of container queries, fundamentally altering how we approach responsive design paradigms.</span>
+                    <span class="simple-sentence">Web design has changed a lot. Container queries make websites work better on different screen sizes.</span>
+                </p>
+                
+                <p>
+                    <span class="complex-sentence">Traditional viewport-based media queries, while groundbreaking in their time, have inherent limitations that become increasingly apparent in complex, component-driven architectures.</span>
+                    <span class="simple-sentence">Old methods of making websites responsive had problems. New methods work better.</span>
+                </p>
+                
+                <blockquote>
+                    "Container queries represent the next evolution in responsive design, enabling truly component-based responsive behavior that adapts to context rather than just screen size."
+                </blockquote>
+                
+                <h2>The Power of Container Queries</h2>
+                <p>
+                    <span class="complex-sentence">Container queries enable developers to apply styles based on the size of a containing element rather than the viewport, facilitating more granular and contextual responsive design decisions.</span>
+                    <span class="simple-sentence">Container queries let you change how things look based on their container size, not just screen size.</span>
+                </p>
+                
+                <h3>Key Benefits</h3>
+                <ul>
+                    <li><strong>Component-based responsiveness:</strong> Each component can respond to its own container</li>
+                    <li><strong>Better reusability:</strong> Components work in any context</li>
+                    <li><strong>Improved maintainability:</strong> Less complex CSS and fewer breakpoints</li>
+                    <li><strong>Enhanced user experience:</strong> More precise responsive behavior</li>
+                </ul>
+                
+                <h2>Accessibility-First Design</h2>
+                <p>
+                    <span class="complex-sentence">Accessibility considerations must be integrated from the foundational level of design and development, ensuring that responsive solutions accommodate users with diverse abilities and assistive technologies.</span>
+                    <span class="simple-sentence">Websites should work for everyone, including people who use screen readers or other helpful tools.</span>
+                </p>
+                
+                <p>
+                    <span class="complex-sentence">ProteusJS incorporates WCAG 2.1 guidelines at multiple compliance levels, providing automated accessibility enhancements that include screen reader optimization, keyboard navigation improvements, and cognitive accessibility features.</span>
+                    <span class="simple-sentence">ProteusJS helps make websites accessible. It works with screen readers and keyboards automatically.</span>
+                </p>
+                
+                <h3>Cognitive Accessibility Features</h3>
+                <p>
+                    <span class="complex-sentence">Cognitive accessibility encompasses design considerations that support users with cognitive disabilities, including simplified language options, reading time estimates, and content structure optimization.</span>
+                    <span class="simple-sentence">Some features help people understand content better. This includes simple language and reading time.</span>
+                </p>
+                
+                <h2>Performance Optimization</h2>
+                <p>
+                    <span class="complex-sentence">Modern web applications demand sophisticated performance optimization strategies that balance functionality with efficiency, particularly in responsive design implementations that must adapt dynamically to changing conditions.</span>
+                    <span class="simple-sentence">Websites need to be fast and work well. ProteusJS helps with this.</span>
+                </p>
+                
+                <p>
+                    <span class="complex-sentence">ProteusJS implements advanced performance monitoring capabilities, including real-time metrics tracking, memory management, and optimization recommendations that ensure optimal user experience across diverse devices and network conditions.</span>
+                    <span class="simple-sentence">ProteusJS watches how fast your website runs and helps make it better.</span>
+                </p>
+                
+                <h2>Conclusion</h2>
+                <p>
+                    <span class="complex-sentence">The convergence of container queries, accessibility-first design principles, and performance optimization represents a paradigm shift toward more inclusive, efficient, and maintainable web development practices.</span>
+                    <span class="simple-sentence">New web design methods make websites better for everyone. They are faster and easier to use.</span>
+                </p>
+                
+                <p>
+                    <span class="complex-sentence">As we continue to push the boundaries of what's possible on the web, tools like ProteusJS provide the foundation for creating experiences that are not only visually compelling but also universally accessible and performant.</span>
+                    <span class="simple-sentence">ProteusJS helps create websites that look good and work well for all users.</span>
+                </p>
+            </article>
+        </main>
+        
+        <div class="typography-metrics">
+            <h3>Typography & Accessibility Metrics</h3>
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <div class="metric-value" id="current-font-size">16px</div>
+                    <div class="metric-label">Current Font Size</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="current-line-height">1.6</div>
+                    <div class="metric-label">Line Height Ratio</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="wcag-compliance">AA</div>
+                    <div class="metric-label">WCAG Compliance</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="reading-level-display">Standard</div>
+                    <div class="metric-label">Reading Level</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // ProteusJS Demo Implementation
+        class ProteusJSBlogDemo {
+            constructor() {
+                this.isSimplified = false;
+                this.isHighContrast = false;
+                this.currentFontSize = 16;
+                this.currentLineHeight = 1.6;
+                this.readingLevel = 'standard';
+            }
+            
+            init() {
+                this.calculateReadingTime();
+                this.setupControls();
+                this.enableAccessibilityFeatures();
+                this.applyFluidTypography();
+            }
+            
+            calculateReadingTime() {
+                const content = document.querySelector('.article-content');
+                const text = content.textContent || content.innerText || '';
+                const wordsPerMinute = 200;
+                const words = text.trim().split(/\s+/).length;
+                const readingTime = Math.ceil(words / wordsPerMinute);
+                
+                const readingTimeElement = document.querySelector('[data-reading-time]');
+                readingTimeElement.textContent = `${readingTime} min read`;
+                readingTimeElement.setAttribute('aria-label', `Estimated reading time: ${readingTime} minutes`);
+            }
+            
+            setupControls() {
+                // Font size control
+                const fontSizeSlider = document.getElementById('font-size');
+                const fontSizeDisplay = document.getElementById('font-size-display');
+                
+                fontSizeSlider.addEventListener('input', (e) => {
+                    this.currentFontSize = parseInt(e.target.value);
+                    this.updateTypography();
+                    fontSizeDisplay.textContent = `${this.currentFontSize}px`;
+                });
+                
+                // Line height control
+                const lineHeightSlider = document.getElementById('line-height');
+                const lineHeightDisplay = document.getElementById('line-height-display');
+                
+                lineHeightSlider.addEventListener('input', (e) => {
+                    this.currentLineHeight = parseFloat(e.target.value);
+                    this.updateTypography();
+                    lineHeightDisplay.textContent = this.currentLineHeight;
+                });
+                
+                // Reading level control
+                const readingLevelSelect = document.getElementById('reading-level');
+                readingLevelSelect.addEventListener('change', (e) => {
+                    this.readingLevel = e.target.value;
+                    this.toggleSimplifiedContent(e.target.value === 'simplified');
+                });
+                
+                // High contrast toggle
+                const contrastButton = document.getElementById('toggle-contrast');
+                contrastButton.addEventListener('click', () => {
+                    this.toggleHighContrast();
+                });
+                
+                // Simplified view toggle
+                const simplifiedButton = document.getElementById('toggle-simplified');
+                simplifiedButton.addEventListener('click', () => {
+                    this.toggleSimplifiedView();
+                });
+            }
+            
+            updateTypography() {
+                const content = document.querySelector('.article-content');
+                content.style.fontSize = `${this.currentFontSize}px`;
+                content.style.lineHeight = this.currentLineHeight;
+                
+                // Update metrics display
+                document.getElementById('current-font-size').textContent = `${this.currentFontSize}px`;
+                document.getElementById('current-line-height').textContent = this.currentLineHeight;
+                
+                // Check WCAG compliance
+                const wcagLevel = this.checkWCAGCompliance();
+                document.getElementById('wcag-compliance').textContent = wcagLevel;
+                
+                // Announce changes for screen readers
+                this.announceChange(`Typography updated: ${this.currentFontSize}px font size, ${this.currentLineHeight} line height`);
+            }
+            
+            checkWCAGCompliance() {
+                // WCAG AAA requires line height of at least 1.5
+                if (this.currentLineHeight >= 1.5 && this.currentFontSize >= 16) {
+                    return 'AAA';
+                } else if (this.currentLineHeight >= 1.4 && this.currentFontSize >= 14) {
+                    return 'AA';
+                } else {
+                    return 'A';
+                }
+            }
+            
+            toggleSimplifiedContent(enable) {
+                const body = document.body;
+                if (enable) {
+                    body.classList.add('simplified');
+                    this.readingLevel = 'simplified';
+                } else {
+                    body.classList.remove('simplified');
+                    this.readingLevel = 'standard';
+                }
+                
+                document.getElementById('reading-level-display').textContent = 
+                    enable ? 'Simplified' : 'Standard';
+                
+                this.announceChange(`Reading level changed to ${enable ? 'simplified' : 'standard'}`);
+            }
+            
+            toggleHighContrast() {
+                const body = document.body;
+                const button = document.getElementById('toggle-contrast');
+                
+                this.isHighContrast = !this.isHighContrast;
+                
+                if (this.isHighContrast) {
+                    body.classList.add('high-contrast');
+                    button.textContent = 'Normal Contrast';
+                    button.classList.add('active');
+                } else {
+                    body.classList.remove('high-contrast');
+                    button.textContent = 'High Contrast';
+                    button.classList.remove('active');
+                }
+                
+                this.announceChange(`Contrast mode ${this.isHighContrast ? 'enabled' : 'disabled'}`);
+            }
+            
+            toggleSimplifiedView() {
+                const button = document.getElementById('toggle-simplified');
+                const select = document.getElementById('reading-level');
+                
+                this.isSimplified = !this.isSimplified;
+                
+                if (this.isSimplified) {
+                    this.toggleSimplifiedContent(true);
+                    select.value = 'simplified';
+                    button.textContent = 'Standard View';
+                    button.classList.add('active');
+                } else {
+                    this.toggleSimplifiedContent(false);
+                    select.value = 'standard';
+                    button.textContent = 'Simplified View';
+                    button.classList.remove('active');
+                }
+            }
+            
+            enableAccessibilityFeatures() {
+                // Add skip links functionality
+                const skipLink = document.querySelector('.skip-link');
+                skipLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.getElementById('main-content');
+                    target.focus();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                });
+                
+                // Enhance keyboard navigation
+                this.enhanceKeyboardNavigation();
+                
+                // Add ARIA live region for announcements
+                this.createLiveRegion();
+            }
+            
+            enhanceKeyboardNavigation() {
+                // Make article content focusable for screen readers
+                const article = document.querySelector('.article-content');
+                article.setAttribute('tabindex', '0');
+                article.setAttribute('role', 'article');
+                article.setAttribute('aria-label', 'Main article content');
+                
+                // Add keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.altKey) {
+                        switch (e.key) {
+                            case 'c':
+                                e.preventDefault();
+                                this.toggleHighContrast();
+                                break;
+                            case 's':
+                                e.preventDefault();
+                                this.toggleSimplifiedView();
+                                break;
+                        }
+                    }
+                });
+            }
+            
+            createLiveRegion() {
+                const liveRegion = document.createElement('div');
+                liveRegion.id = 'proteus-live-region';
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
+                document.body.appendChild(liveRegion);
+            }
+            
+            announceChange(message) {
+                const liveRegion = document.getElementById('proteus-live-region');
+                if (liveRegion) {
+                    liveRegion.textContent = message;
+                }
+            }
+            
+            applyFluidTypography() {
+                // Apply fluid typography to headings
+                const headings = document.querySelectorAll('h1, h2, h3');
+                headings.forEach(heading => {
+                    const tagName = heading.tagName.toLowerCase();
+                    let minSize, maxSize;
+                    
+                    switch (tagName) {
+                        case 'h1':
+                            minSize = 24;
+                            maxSize = 36;
+                            break;
+                        case 'h2':
+                            minSize = 20;
+                            maxSize = 28;
+                            break;
+                        case 'h3':
+                            minSize = 18;
+                            maxSize = 24;
+                            break;
+                    }
+                    
+                    const fluidSize = `clamp(${minSize}px, ${minSize}px + (${maxSize} - ${minSize}) * ((100vw - 320px) / (1200 - 320)), ${maxSize}px)`;
+                    heading.style.fontSize = fluidSize;
+                });
+            }
+        }
+        
+        // Initialize the demo
+        const demo = new ProteusJSBlogDemo();
+        demo.init();
+
+        // Add keyboard shortcut help
+        console.log('🎹 Keyboard shortcuts:');
+        console.log('Alt + C: Toggle high contrast');
+        console.log('Alt + S: Toggle simplified view');
+        console.log('📖 This demo showcases ProteusJS fluid typography and accessibility features');
+    </script>
+</body>
+</html>

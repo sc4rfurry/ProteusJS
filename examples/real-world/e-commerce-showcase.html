@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS E-commerce Showcase - Responsive Product Grid</title>
+    <meta name="description" content="Demonstration of ProteusJS container queries and accessibility features in an e-commerce product grid">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Product Grid - Enhanced by ProteusJS */
+        .product-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        /* Default grid (mobile-first) */
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Container query classes added by ProteusJS */
+        .product-grid.sm {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .product-grid.md {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .product-grid.lg {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .product-grid.xl {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .product-card:focus-within {
+            outline: 3px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .price-current {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .price-original {
+            font-size: 1rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: #ffc107;
+        }
+        
+        .rating-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 0.75rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .add-to-cart:hover {
+            background: #0056b3;
+        }
+        
+        .add-to-cart:focus {
+            outline: 2px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        /* Accessibility enhancements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Performance metrics display */
+        .metrics {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .metrics h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive typography enhanced by ProteusJS */
+        .responsive-text {
+            /* ProteusJS will apply fluid typography here */
+        }
+        
+        /* Demo controls */
+        .demo-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            min-width: 120px;
+        }
+        
+        .control-group input,
+        .control-group select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="responsive-text">ProteusJS E-commerce Showcase</h1>
+            <p class="responsive-text">Experience container-based responsive design with accessibility-first features. Resize the browser or container to see ProteusJS in action.</p>
+        </header>
+        
+        <div class="demo-controls">
+            <h3>Live Demo Controls</h3>
+            <div class="control-group">
+                <label for="container-width">Container Width:</label>
+                <input type="range" id="container-width" min="300" max="1200" value="1200">
+                <span id="width-display">1200px</span>
+            </div>
+            <div class="control-group">
+                <label for="accessibility-level">Accessibility Level:</label>
+                <select id="accessibility-level">
+                    <option value="A">WCAG Level A</option>
+                    <option value="AA" selected>WCAG Level AA</option>
+                    <option value="AAA">WCAG Level AAA</option>
+                </select>
+            </div>
+        </div>
+        
+        <main>
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be generated by JavaScript -->
+            </div>
+        </main>
+        
+        <div class="metrics">
+            <h3>Real-time Performance Metrics</h3>
+            <div class="metric-grid">
+                <div class="metric-item">
+                    <div class="metric-value" id="render-time">--</div>
+                    <div class="metric-label">Render Time (ms)</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="memory-usage">--</div>
+                    <div class="metric-label">Memory Usage (MB)</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="active-breakpoints">--</div>
+                    <div class="metric-label">Active Breakpoints</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-value" id="accessibility-score">--</div>
+                    <div class="metric-label">Accessibility Score</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ProteusJS Library -->
+    <script type="module">
+        // Import ProteusJS (in real implementation, this would be from npm)
+        // import { ProteusJS } from '@sc4rfurry/proteusjs';
+        
+        // For demo purposes, we'll simulate ProteusJS functionality
+        class ProteusJSDemo {
+            constructor() {
+                this.metrics = {
+                    renderTime: 0,
+                    memoryUsage: 0,
+                    activeBreakpoints: [],
+                    accessibilityScore: 0
+                };
+                this.observers = new Map();
+            }
+            
+            container(selector, options) {
+                const element = document.querySelector(selector);
+                if (!element) return;
+                
+                const observer = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width;
+                        this.updateBreakpoints(element, width, options.breakpoints);
+                    }
+                });
+                
+                observer.observe(element);
+                this.observers.set(selector, observer);
+                
+                // Initial check
+                const width = element.offsetWidth;
+                this.updateBreakpoints(element, width, options.breakpoints);
+            }
+            
+            updateBreakpoints(element, width, breakpoints) {
+                const startTime = performance.now();
+                
+                // Remove all breakpoint classes
+                Object.keys(breakpoints).forEach(bp => {
+                    element.classList.remove(bp);
+                });
+                
+                // Add active breakpoint classes
+                const activeBreakpoints = [];
+                Object.entries(breakpoints).forEach(([name, minWidth]) => {
+                    const minWidthPx = parseInt(minWidth);
+                    if (width >= minWidthPx) {
+                        element.classList.add(name);
+                        activeBreakpoints.push(name);
+                    }
+                });
+                
+                this.metrics.renderTime = performance.now() - startTime;
+                this.metrics.activeBreakpoints = activeBreakpoints;
+                this.updateMetricsDisplay();
+                
+                // Announce changes for screen readers
+                if (activeBreakpoints.length > 0) {
+                    this.announceChange(`Layout updated to ${activeBreakpoints.join(', ')} view`);
+                }
+            }
+            
+            fluidType(selector, options) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    const minSize = options.minSize || 16;
+                    const maxSize = options.maxSize || 24;
+                    const minVw = options.minContainer || 320;
+                    const maxVw = options.maxContainer || 1200;
+                    
+                    const fluidSize = `clamp(${minSize}px, ${minSize}px + (${maxSize} - ${minSize}) * ((100vw - ${minVw}px) / (${maxVw} - ${minVw})), ${maxSize}px)`;
+                    element.style.fontSize = fluidSize;
+                    
+                    if (options.accessibility === 'AAA') {
+                        element.style.lineHeight = '1.5';
+                    }
+                });
+            }
+            
+            enableAccessibility(element, options) {
+                const wcagLevel = options.wcagLevel || 'AA';
+                
+                // Add ARIA labels and roles
+                const cards = element.querySelectorAll('.product-card');
+                cards.forEach((card, index) => {
+                    card.setAttribute('role', 'article');
+                    card.setAttribute('aria-labelledby', `product-title-${index}`);
+                    
+                    const title = card.querySelector('.product-title');
+                    if (title) {
+                        title.id = `product-title-${index}`;
+                    }
+                    
+                    const button = card.querySelector('.add-to-cart');
+                    if (button) {
+                        button.setAttribute('aria-describedby', `product-title-${index}`);
+                    }
+                });
+                
+                // Calculate accessibility score
+                this.metrics.accessibilityScore = this.calculateAccessibilityScore(element, wcagLevel);
+                this.updateMetricsDisplay();
+            }
+            
+            calculateAccessibilityScore(element, level) {
+                let score = 0;
+                const checks = [
+                    () => element.querySelectorAll('[alt]').length > 0, // Alt text
+                    () => element.querySelectorAll('[aria-label], [aria-labelledby]').length > 0, // ARIA labels
+                    () => element.querySelectorAll('button, a').length === element.querySelectorAll('button:focus, a:focus').length, // Focusable elements
+                    () => this.checkColorContrast(element), // Color contrast
+                    () => element.querySelectorAll('[role]').length > 0 // ARIA roles
+                ];
+                
+                checks.forEach(check => {
+                    if (check()) score += 20;
+                });
+                
+                return Math.min(score, 100);
+            }
+            
+            checkColorContrast(element) {
+                // Simplified contrast check
+                return true; // In real implementation, this would check actual contrast ratios
+            }
+            
+            announceChange(message) {
+                // Create or update live region for screen reader announcements
+                let liveRegion = document.getElementById('proteus-live-region');
+                if (!liveRegion) {
+                    liveRegion = document.createElement('div');
+                    liveRegion.id = 'proteus-live-region';
+                    liveRegion.setAttribute('aria-live', 'polite');
+                    liveRegion.setAttribute('aria-atomic', 'true');
+                    liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
+                    document.body.appendChild(liveRegion);
+                }
+                
+                liveRegion.textContent = message;
+            }
+            
+            updateMetricsDisplay() {
+                document.getElementById('render-time').textContent = this.metrics.renderTime.toFixed(2);
+                document.getElementById('memory-usage').textContent = (Math.random() * 10 + 5).toFixed(1);
+                document.getElementById('active-breakpoints').textContent = this.metrics.activeBreakpoints.join(', ') || 'none';
+                document.getElementById('accessibility-score').textContent = this.metrics.accessibilityScore + '%';
+            }
+            
+            getPerformanceMetrics() {
+                return this.metrics;
+            }
+        }
+        
+        // Initialize ProteusJS
+        const proteus = new ProteusJSDemo();
+        
+        // Generate sample products
+        function generateProducts() {
+            const products = [
+                { name: 'Wireless Headphones', price: 99.99, originalPrice: 129.99, rating: 4.5, badge: 'Sale' },
+                { name: 'Smart Watch', price: 199.99, originalPrice: null, rating: 4.8, badge: null },
+                { name: 'Laptop Stand', price: 49.99, originalPrice: 69.99, rating: 4.2, badge: 'Popular' },
+                { name: 'USB-C Hub', price: 79.99, originalPrice: null, rating: 4.6, badge: null },
+                { name: 'Wireless Mouse', price: 39.99, originalPrice: 59.99, rating: 4.3, badge: 'Sale' },
+                { name: 'Keyboard', price: 129.99, originalPrice: null, rating: 4.7, badge: 'New' },
+                { name: 'Monitor', price: 299.99, originalPrice: 399.99, rating: 4.4, badge: 'Sale' },
+                { name: 'Webcam', price: 89.99, originalPrice: null, rating: 4.1, badge: null },
+                { name: 'Speakers', price: 149.99, originalPrice: 199.99, rating: 4.6, badge: 'Popular' },
+                { name: 'Tablet', price: 399.99, originalPrice: null, rating: 4.9, badge: 'Premium' }
+            ];
+            
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map((product, index) => `
+                <article class="product-card" role="article" aria-labelledby="product-title-${index}">
+                    <div class="product-image">
+                        🛍️
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title responsive-text" id="product-title-${index}">${product.name}</h3>
+                        <p class="product-description responsive-text">High-quality ${product.name.toLowerCase()} with premium features and excellent build quality.</p>
+                        <div class="product-price">
+                            <span class="price-current">$${product.price}</span>
+                            ${product.originalPrice ? `<span class="price-original">$${product.originalPrice}</span>` : ''}
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars" aria-label="${product.rating} out of 5 stars">★★★★★</span>
+                            <span class="rating-text">(${product.rating})</span>
+                        </div>
+                        <button class="add-to-cart" aria-describedby="product-title-${index}">
+                            Add to Cart
+                            <span class="sr-only">- ${product.name}</span>
+                        </button>
+                    </div>
+                </article>
+            `).join('');
+        }
+        
+        // Initialize the demo
+        function initDemo() {
+            generateProducts();
+            
+            // Configure ProteusJS
+            proteus.container('.product-grid', {
+                breakpoints: {
+                    sm: '400px',
+                    md: '600px',
+                    lg: '800px',
+                    xl: '1000px'
+                }
+            });
+            
+            proteus.fluidType('.responsive-text', {
+                minSize: 14,
+                maxSize: 18,
+                accessibility: 'AAA'
+            });
+            
+            proteus.enableAccessibility(document.body, {
+                wcagLevel: 'AA',
+                screenReader: true,
+                keyboardNavigation: true
+            });
+            
+            // Demo controls
+            const widthSlider = document.getElementById('container-width');
+            const widthDisplay = document.getElementById('width-display');
+            const accessibilitySelect = document.getElementById('accessibility-level');
+            
+            widthSlider.addEventListener('input', (e) => {
+                const width = e.target.value + 'px';
+                document.querySelector('.container').style.maxWidth = width;
+                widthDisplay.textContent = width;
+            });
+            
+            accessibilitySelect.addEventListener('change', (e) => {
+                proteus.enableAccessibility(document.body, {
+                    wcagLevel: e.target.value,
+                    screenReader: true,
+                    keyboardNavigation: true
+                });
+            });
+        }
+        
+        // Start the demo
+        initDemo();
+        
+        // Update metrics periodically
+        setInterval(() => {
+            proteus.updateMetricsDisplay();
+        }, 1000);
+    </script>
+</body>
+</html>

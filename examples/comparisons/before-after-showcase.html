@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS Before/After Comparison - See the Difference</title>
+    <meta name="description" content="Side-by-side comparison showing the improvements ProteusJS brings to responsive design and accessibility">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Comparison Layout */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .comparison-side {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-header {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .before .comparison-header {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .after .comparison-header {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .comparison-content {
+            padding: 2rem;
+            min-height: 400px;
+        }
+        
+        /* Before (Traditional) Styles */
+        .before-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .before-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .before-title {
+            font-size: 16px; /* Fixed size */
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .before-text {
+            font-size: 14px; /* Fixed size */
+            color: #666;
+            line-height: 1.4; /* Below WCAG AAA */
+        }
+        
+        /* After (ProteusJS) Styles */
+        .after-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        /* Default: mobile-first */
+        .after-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Container query classes added by ProteusJS */
+        .after-grid.sm {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .after-grid.lg {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .after-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .after-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .after-card:focus-within {
+            outline: 3px solid #007bff;
+            outline-offset: 2px;
+        }
+        
+        .after-title {
+            /* Fluid typography applied by ProteusJS */
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .after-text {
+            /* Fluid typography with WCAG AAA compliance */
+            color: #555;
+            line-height: 1.6; /* WCAG AAA compliant */
+        }
+        
+        /* Controls */
+        .controls {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .controls h3 {
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            min-width: 150px;
+        }
+        
+        .control-group input,
+        .control-group select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        /* Metrics Comparison */
+        .metrics-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metrics-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .metrics-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .before .metrics-title {
+            color: #e74c3c;
+        }
+        
+        .after .metrics-title {
+            color: #27ae60;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric-label {
+            font-weight: 500;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .metric-good {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .metric-bad {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .metric-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        /* Feature Comparison Table */
+        .feature-comparison {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .feature-comparison h3 {
+            padding: 2rem;
+            margin: 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .comparison-table .feature-name {
+            font-weight: 600;
+            width: 40%;
+        }
+        
+        .comparison-table .before-col {
+            width: 30%;
+            color: #e74c3c;
+        }
+        
+        .comparison-table .after-col {
+            width: 30%;
+            color: #27ae60;
+        }
+        
+        .status-icon {
+            margin-right: 0.5rem;
+        }
+        
+        /* Code Examples */
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .code-panel {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .code-header {
+            padding: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .before .code-header {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .after .code-header {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .code-content {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .comparison,
+            .metrics-comparison,
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Accessibility enhancements */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Focus indicators */
+        button:focus,
+        input:focus,
+        select:focus {
+            outline: 3px solid #007bff;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>ProteusJS: Before vs After</h1>
+            <p>See the dramatic improvements ProteusJS brings to responsive design, accessibility, and performance. Resize the browser or adjust the controls to see the differences in action.</p>
+        </header>
+        
+        <div class="controls">
+            <h3>Interactive Demo Controls</h3>
+            <div class="control-group">
+                <label for="container-width">Container Width:</label>
+                <input type="range" id="container-width" min="300" max="800" value="600">
+                <span id="width-display">600px</span>
+            </div>
+            <div class="control-group">
+                <label for="font-size">Base Font Size:</label>
+                <input type="range" id="font-size" min="12" max="20" value="16">
+                <span id="font-display">16px</span>
+            </div>
+            <div class="control-group">
+                <label for="accessibility-mode">Accessibility Mode:</label>
+                <select id="accessibility-mode">
+                    <option value="standard">Standard</option>
+                    <option value="enhanced">Enhanced (WCAG AAA)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="comparison">
+            <div class="comparison-side before">
+                <div class="comparison-header">
+                    ❌ Before: Traditional Approach
+                </div>
+                <div class="comparison-content">
+                    <div class="before-grid" id="beforeGrid">
+                        <div class="before-card">
+                            <h3 class="before-title">Fixed Layout</h3>
+                            <p class="before-text">This layout uses viewport-based media queries. It doesn't adapt to container size, only screen size. Typography is fixed and may not meet accessibility standards.</p>
+                        </div>
+                        <div class="before-card">
+                            <h3 class="before-title">Limited Responsive</h3>
+                            <p class="before-text">Components break at awkward sizes because they respond to viewport, not their actual container width.</p>
+                        </div>
+                        <div class="before-card">
+                            <h3 class="before-title">Accessibility Issues</h3>
+                            <p class="before-text">No automatic WCAG compliance. Line height and contrast may not meet standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="comparison-side after">
+                <div class="comparison-header">
+                    ✅ After: ProteusJS Enhanced
+                </div>
+                <div class="comparison-content">
+                    <div class="after-grid" id="afterGrid">
+                        <div class="after-card" tabindex="0">
+                            <h3 class="after-title">Container Queries</h3>
+                            <p class="after-text">This layout adapts to its container size, not viewport. Components are truly modular and work in any context. Typography scales fluidly and meets WCAG AAA standards.</p>
+                        </div>
+                        <div class="after-card" tabindex="0">
+                            <h3 class="after-title">True Responsiveness</h3>
+                            <p class="after-text">Components respond to their actual available space, creating more predictable and flexible layouts.</p>
+                        </div>
+                        <div class="after-card" tabindex="0">
+                            <h3 class="after-title">Accessibility First</h3>
+                            <p class="after-text">Automatic WCAG compliance with proper line height, contrast, and screen reader support built-in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metrics-comparison">
+            <div class="metrics-panel before">
+                <h3 class="metrics-title">Traditional Metrics</h3>
+                <div class="metric-item">
+                    <span class="metric-label">WCAG Compliance</span>
+                    <span class="metric-value metric-bad">Level A</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Responsive Breakpoints</span>
+                    <span class="metric-value metric-warning">Viewport Only</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Typography</span>
+                    <span class="metric-value metric-bad">Fixed Size</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Performance</span>
+                    <span class="metric-value metric-warning">Basic</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Maintenance</span>
+                    <span class="metric-value metric-bad">Complex CSS</span>
+                </div>
+            </div>
+            
+            <div class="metrics-panel after">
+                <h3 class="metrics-title">ProteusJS Metrics</h3>
+                <div class="metric-item">
+                    <span class="metric-label">WCAG Compliance</span>
+                    <span class="metric-value metric-good">Level AAA</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Responsive Breakpoints</span>
+                    <span class="metric-value metric-good">Container Based</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Typography</span>
+                    <span class="metric-value metric-good">Fluid & Accessible</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Performance</span>
+                    <span class="metric-value metric-good">Optimized</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Maintenance</span>
+                    <span class="metric-value metric-good">Automated</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-comparison">
+            <h3>Feature Comparison</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-name">Feature</th>
+                        <th class="before-col">Traditional Approach</th>
+                        <th class="after-col">ProteusJS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">Responsive Design</td>
+                        <td class="before-col"><span class="status-icon">❌</span>Viewport-based only</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Container queries + viewport</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Typography</td>
+                        <td class="before-col"><span class="status-icon">❌</span>Fixed sizes</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Fluid & accessible</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">WCAG Compliance</td>
+                        <td class="before-col"><span class="status-icon">⚠️</span>Manual implementation</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Automatic AAA compliance</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Screen Reader Support</td>
+                        <td class="before-col"><span class="status-icon">❌</span>Basic or missing</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Built-in announcements</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Performance Monitoring</td>
+                        <td class="before-col"><span class="status-icon">❌</span>Manual setup required</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Real-time metrics</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Memory Management</td>
+                        <td class="before-col"><span class="status-icon">⚠️</span>Manual cleanup</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Automatic optimization</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Framework Support</td>
+                        <td class="before-col"><span class="status-icon">⚠️</span>Framework-specific</td>
+                        <td class="after-col"><span class="status-icon">✅</span>Universal compatibility</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="code-comparison">
+            <div class="code-panel before">
+                <div class="code-header">Traditional CSS</div>
+                <div class="code-content">
+/* Traditional viewport-based approach */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  padding: 1rem;
+  font-size: 16px; /* Fixed */
+  line-height: 1.4; /* Below WCAG AAA */
+}
+
+/* No accessibility features */
+/* No performance monitoring */
+/* Manual ARIA implementation */
+                </div>
+            </div>
+            
+            <div class="code-panel after">
+                <div class="code-header">ProteusJS Enhanced</div>
+                <div class="code-content">
+// ProteusJS container-based approach
+import { ProteusJS } from '@sc4rfurry/proteusjs';
+
+const proteus = new ProteusJS();
+
+// Container queries (not viewport)
+proteus.container('.grid', {
+  breakpoints: {
+    sm: '400px',
+    md: '600px',
+    lg: '800px'
+  }
+});
+
+// Fluid typography with WCAG AAA
+proteus.fluidType('.card', {
+  minSize: 14,
+  maxSize: 18,
+  accessibility: 'AAA' // 1.5+ line height
+});
+
+// Automatic accessibility
+proteus.enableAccessibility('.card', {
+  wcagLevel: 'AAA',
+  screenReader: true,
+  announceChanges: true
+});
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // ProteusJS Before/After Demo
+        class BeforeAfterDemo {
+            constructor() {
+                this.currentWidth = 600;
+                this.currentFontSize = 16;
+                this.accessibilityMode = 'standard';
+            }
+            
+            init() {
+                this.setupControls();
+                this.setupContainerQueries();
+                this.setupFluidTypography();
+                this.createLiveRegion();
+            }
+            
+            setupControls() {
+                const widthSlider = document.getElementById('container-width');
+                const widthDisplay = document.getElementById('width-display');
+                const fontSlider = document.getElementById('font-size');
+                const fontDisplay = document.getElementById('font-display');
+                const accessibilitySelect = document.getElementById('accessibility-mode');
+                
+                widthSlider.addEventListener('input', (e) => {
+                    this.currentWidth = parseInt(e.target.value);
+                    widthDisplay.textContent = this.currentWidth + 'px';
+                    this.updateContainerWidths();
+                });
+                
+                fontSlider.addEventListener('input', (e) => {
+                    this.currentFontSize = parseInt(e.target.value);
+                    fontDisplay.textContent = this.currentFontSize + 'px';
+                    this.updateTypography();
+                });
+                
+                accessibilitySelect.addEventListener('change', (e) => {
+                    this.accessibilityMode = e.target.value;
+                    this.updateAccessibility();
+                });
+            }
+            
+            setupContainerQueries() {
+                // Only the "after" grid gets container queries
+                const afterObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width;
+                        this.updateAfterGrid(entry.target, width);
+                    }
+                });
+                
+                afterObserver.observe(document.getElementById('afterGrid'));
+                
+                // Initial update
+                this.updateContainerWidths();
+            }
+            
+            updateContainerWidths() {
+                const beforeGrid = document.getElementById('beforeGrid');
+                const afterGrid = document.getElementById('afterGrid');
+                
+                // Set both containers to the same width for comparison
+                beforeGrid.style.maxWidth = this.currentWidth + 'px';
+                afterGrid.style.maxWidth = this.currentWidth + 'px';
+            }
+            
+            updateAfterGrid(element, width) {
+                // Remove all breakpoint classes
+                element.classList.remove('sm', 'lg');
+                
+                // Add appropriate breakpoint classes
+                if (width >= 400) element.classList.add('sm');
+                if (width >= 600) element.classList.add('lg');
+                
+                // Announce changes
+                let layout = 'single column';
+                if (width >= 400) layout = 'two columns';
+                if (width >= 600) layout = 'three columns';
+                
+                this.announceChange(`ProteusJS layout updated to ${layout}`);
+            }
+            
+            setupFluidTypography() {
+                // Apply fluid typography to "after" elements
+                this.updateTypography();
+            }
+            
+            updateTypography() {
+                const afterTitles = document.querySelectorAll('.after-title');
+                const afterTexts = document.querySelectorAll('.after-text');
+                
+                // Fluid typography for titles
+                afterTitles.forEach(title => {
+                    const minSize = this.currentFontSize + 2;
+                    const maxSize = this.currentFontSize + 6;
+                    const fluidSize = `clamp(${minSize}px, ${minSize}px + (${maxSize} - ${minSize}) * ((100vw - 320px) / (1200 - 320)), ${maxSize}px)`;
+                    title.style.fontSize = fluidSize;
+                });
+                
+                // Fluid typography for text
+                afterTexts.forEach(text => {
+                    const minSize = this.currentFontSize - 1;
+                    const maxSize = this.currentFontSize + 1;
+                    const fluidSize = `clamp(${minSize}px, ${minSize}px + (${maxSize} - ${minSize}) * ((100vw - 320px) / (1200 - 320)), ${maxSize}px)`;
+                    text.style.fontSize = fluidSize;
+                });
+                
+                // Update before elements with fixed sizes
+                const beforeTitles = document.querySelectorAll('.before-title');
+                const beforeTexts = document.querySelectorAll('.before-text');
+                
+                beforeTitles.forEach(title => {
+                    title.style.fontSize = '16px'; // Always fixed
+                });
+                
+                beforeTexts.forEach(text => {
+                    text.style.fontSize = '14px'; // Always fixed
+                });
+            }
+            
+            updateAccessibility() {
+                const afterTexts = document.querySelectorAll('.after-text');
+                
+                if (this.accessibilityMode === 'enhanced') {
+                    afterTexts.forEach(text => {
+                        text.style.lineHeight = '1.6'; // WCAG AAA
+                    });
+                    this.announceChange('Enhanced accessibility mode enabled with WCAG AAA compliance');
+                } else {
+                    afterTexts.forEach(text => {
+                        text.style.lineHeight = '1.5'; // WCAG AA
+                    });
+                    this.announceChange('Standard accessibility mode enabled with WCAG AA compliance');
+                }
+            }
+            
+            createLiveRegion() {
+                const liveRegion = document.createElement('div');
+                liveRegion.id = 'proteus-live-region';
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
+                document.body.appendChild(liveRegion);
+            }
+            
+            announceChange(message) {
+                const liveRegion = document.getElementById('proteus-live-region');
+                if (liveRegion) {
+                    liveRegion.textContent = message;
+                }
+            }
+        }
+        
+        // Initialize the demo
+        const demo = new BeforeAfterDemo();
+        demo.init();
+        
+        console.log('📊 ProteusJS Before/After Comparison Demo');
+        console.log('🎛️ Use the controls to see the differences between traditional and ProteusJS approaches');
+        console.log('📏 Notice how the "After" side adapts to container size, not just viewport');
+    </script>
+</body>
+</html>

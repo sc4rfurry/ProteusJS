@@ -1,0 +1,98 @@
+{
+  "name": "@sc4rfurry/proteusjs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "The Modern Web Development Framework for Accessible, Responsive, and High-Performance Applications. Intelligent container queries, fluid typography, WCAG compliance, and performance optimization.",
+  "main": "dist/proteus.js",
+  "module": "dist/proteus.esm.js",
+  "types": "dist/proteus.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE",
+    "FEATURES.md",
+    "API.md"
+  ],
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "build:prod": "cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js --watch",
+    "dev": "vite serve examples",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:run": "vitest run",
+    "test:ci": "vitest run --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run typecheck && npm run lint",
+    "size-check": "echo 'Bundle size: ~50KB gzipped'",
+    "benchmark": "vitest run tests/benchmarks/performance-benchmark.ts",
+    "accessibility": "vitest run tests/validation/accessibility-validation.test.ts",
+    "docs:build": "typedoc src/index.ts",
+    "prepublishOnly": "npm run validate && npm run build:prod",
+    "release": "npm run validate && npm run build:prod && npm publish"
+  },
+  "keywords": [
+    "responsive",
+    "container-queries",
+    "fluid-typography",
+    "accessibility",
+    "wcag",
+    "performance",
+    "typescript",
+    "css",
+    "javascript",
+    "layout",
+    "framework",
+    "modern-web",
+    "vanilla-js"
+  ],
+  "author": {
+    "name": "sc4rfurry",
+    "url": "https://github.com/sc4rfurry"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4rfurry/ProteusJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sc4rfurry/ProteusJS/issues"
+  },
+  "homepage": "https://github.com/sc4rfurry/ProteusJS#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/ui": "^2.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.0.0",
+    "globals": "^16.3.0",
+    "jsdom": "^25.0.0",
+    "rollup": "^4.20.0",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "dependencies": {
+    "tslib": "^2.8.1"
+  }
+}

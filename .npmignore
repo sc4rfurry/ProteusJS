@@ -1,0 +1,73 @@
+# Development files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Source and development directories
+src/
+tests/
+examples/
+scripts/
+.github/
+Instructions/
+
+# Configuration files
+.vscode/
+.idea/
+*.config.js
+*.config.ts
+rollup.config.js
+vite.config.ts
+vitest.config.ts
+tsconfig.json
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# Test files
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+coverage/
+.nyc_output/
+
+# Build artifacts (keep only dist/)
+node_modules/
+.cache/
+.temp/
+.tmp/
+
+# Environment and local files
+.env*
+.local
+
+# Documentation source (keep compiled docs)
+*.md.backup
+CONTRIBUTING.md
+CHANGELOG.md
+PRODUCTION-READY.md
+PACKAGE-READY-SUMMARY.md
+PUBLICATION-READY.md
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD files
+.travis.yml
+.circleci/
+.github/
+appveyor.yml
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc
+*.tgz
+*.tar.gz

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS Dashboard Showcase - Adaptive Admin Panel</title>
+    <meta name="description" content="Demonstration of ProteusJS container queries in a responsive dashboard with accessibility features">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-areas: 
+                "sidebar header"
+                "sidebar main";
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 60px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Container query responsive classes */
+        .dashboard.compact {
+            grid-template-areas: 
+                "header"
+                "main";
+            grid-template-columns: 1fr;
+            grid-template-rows: 60px 1fr;
+        }
+        
+        .dashboard.comfortable {
+            grid-template-columns: 200px 1fr;
+        }
+        
+        .dashboard.spacious {
+            grid-template-columns: 300px 1fr;
+        }
+        
+        /* Header */
+        .header {
+            grid-area: header;
+            background: white;
+            border-bottom: 1px solid #e1e5e9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .dashboard.compact .menu-toggle {
+            display: block;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            grid-area: sidebar;
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            overflow-y: auto;
+        }
+        
+        .dashboard.compact .sidebar {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
+            z-index: 200;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard.compact .sidebar.open {
+            display: block;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: #34495e;
+            color: white;
+        }
+        
+        .nav-link:focus {
+            outline: 2px solid #3498db;
+            outline-offset: -2px;
+        }
+        
+        .nav-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        .main {
+            grid-area: main;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        /* Widget Grid */
+        .widget-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Default grid (mobile-first) */
+        .widget-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        /* Container query classes for widget grid */
+        .widget-grid.sm {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .widget-grid.md {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .widget-grid.lg {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        /* Widget Cards */
+        .widget {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .widget:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .widget-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .widget-icon {
+            font-size: 1.5rem;
+            color: #3498db;
+        }
+        
+        .widget-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .widget-change {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .widget-change.positive {
+            color: #27ae60;
+        }
+        
+        .widget-change.negative {
+            color: #e74c3c;
+        }
+        
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .chart-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chart-control {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .chart-control.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        /* Data Table */
+        .data-table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        /* Accessibility Controls */
+        .accessibility-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            z-index: 300;
+            max-width: 300px;
+        }
+        
+        .accessibility-panel h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .accessibility-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .accessibility-control label {
+            font-weight: 500;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #3498db;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(26px);
+        }
+        
+        /* Performance Metrics */
+        .performance-metrics {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 1rem;
+            }
+            
+            .main {
+                padding: 1rem;
+            }
+            
+            .accessibility-panel {
+                position: static;
+                margin-bottom: 2rem;
+                max-width: none;
+            }
+        }
+        
+        /* High contrast mode */
+        .high-contrast {
+            background: #000;
+            color: #fff;
+        }
+        
+        .high-contrast .widget,
+        .high-contrast .chart-container,
+        .high-contrast .data-table-container,
+        .high-contrast .accessibility-panel,
+        .high-contrast .performance-metrics {
+            background: #222;
+            color: #fff;
+        }
+        
+        .high-contrast .header {
+            background: #111;
+            border-color: #444;
+        }
+        
+        /* Focus indicators */
+        button:focus,
+        .nav-link:focus,
+        .chart-control:focus {
+            outline: 3px solid #3498db;
+            outline-offset: 2px;
+        }
+        
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard" id="dashboard">
+        <header class="header">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+            <h1>ProteusJS Dashboard</h1>
+            <div class="header-controls">
+                <span id="currentTime"></span>
+            </div>
+        </header>
+        
+        <nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" role="menuitem">
+                        <span class="nav-icon">📊</span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" role="menuitem">
+                        <span class="nav-icon">📈</span>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" role="menuitem">
+                        <span class="nav-icon">👥</span>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" role="menuitem">
+                        <span class="nav-icon">⚙️</span>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <main class="main" role="main">
+            <div class="performance-metrics">
+                <h2>ProteusJS Performance Metrics</h2>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-value" id="render-time">--</div>
+                        <div class="metric-label">Render Time (ms)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="active-breakpoints">--</div>
+                        <div class="metric-label">Active Breakpoints</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="memory-usage">--</div>
+                        <div class="metric-label">Memory Usage (MB)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value" id="accessibility-score">--</div>
+                        <div class="metric-label">Accessibility Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="widget-grid" id="widgetGrid">
+                <div class="widget" role="region" aria-labelledby="widget-1-title">
+                    <div class="widget-header">
+                        <h3 class="widget-title" id="widget-1-title">Total Users</h3>
+                        <span class="widget-icon">👥</span>
+                    </div>
+                    <div class="widget-value">12,847</div>
+                    <div class="widget-change positive">
+                        <span>↗</span>
+                        <span>+12.5% from last month</span>
+                    </div>
+                </div>
+                
+                <div class="widget" role="region" aria-labelledby="widget-2-title">
+                    <div class="widget-header">
+                        <h3 class="widget-title" id="widget-2-title">Revenue</h3>
+                        <span class="widget-icon">💰</span>
+                    </div>
+                    <div class="widget-value">$89,432</div>
+                    <div class="widget-change positive">
+                        <span>↗</span>
+                        <span>+8.2% from last month</span>
+                    </div>
+                </div>
+                
+                <div class="widget" role="region" aria-labelledby="widget-3-title">
+                    <div class="widget-header">
+                        <h3 class="widget-title" id="widget-3-title">Conversion Rate</h3>
+                        <span class="widget-icon">📈</span>
+                    </div>
+                    <div class="widget-value">3.24%</div>
+                    <div class="widget-change negative">
+                        <span>↘</span>
+                        <span>-2.1% from last month</span>
+                    </div>
+                </div>
+                
+                <div class="widget" role="region" aria-labelledby="widget-4-title">
+                    <div class="widget-header">
+                        <h3 class="widget-title" id="widget-4-title">Page Views</h3>
+                        <span class="widget-icon">👁️</span>
+                    </div>
+                    <div class="widget-value">1.2M</div>
+                    <div class="widget-change positive">
+                        <span>↗</span>
+                        <span>+15.7% from last month</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container" role="region" aria-labelledby="chart-title">
+                <div class="chart-header">
+                    <h2 class="chart-title" id="chart-title">Analytics Overview</h2>
+                    <div class="chart-controls" role="tablist">
+                        <button class="chart-control active" role="tab" aria-selected="true">7 Days</button>
+                        <button class="chart-control" role="tab" aria-selected="false">30 Days</button>
+                        <button class="chart-control" role="tab" aria-selected="false">90 Days</button>
+                    </div>
+                </div>
+                <div class="chart-placeholder" role="img" aria-label="Analytics chart showing upward trend">
+                    📊 Interactive Chart Area
+                </div>
+            </div>
+            
+            <div class="data-table-container" role="region" aria-labelledby="table-title">
+                <h2 id="table-title">Recent Activity</h2>
+                <table class="data-table" role="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Login</td>
+                            <td>2 minutes ago</td>
+                            <td>✅ Success</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Purchase</td>
+                            <td>5 minutes ago</td>
+                            <td>✅ Success</td>
+                        </tr>
+                        <tr>
+                            <td>Bob Johnson</td>
+                            <td>Registration</td>
+                            <td>8 minutes ago</td>
+                            <td>⏳ Pending</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <div class="accessibility-panel" role="region" aria-labelledby="accessibility-title">
+        <h3 id="accessibility-title">Accessibility Controls</h3>
+        <div class="accessibility-control">
+            <label for="high-contrast-toggle">High Contrast</label>
+            <div class="toggle-switch" id="high-contrast-toggle" role="switch" aria-checked="false" tabindex="0"></div>
+        </div>
+        <div class="accessibility-control">
+            <label for="screen-reader-toggle">Screen Reader Mode</label>
+            <div class="toggle-switch" id="screen-reader-toggle" role="switch" aria-checked="false" tabindex="0"></div>
+        </div>
+        <div class="accessibility-control">
+            <label for="keyboard-nav-toggle">Enhanced Keyboard Nav</label>
+            <div class="toggle-switch active" id="keyboard-nav-toggle" role="switch" aria-checked="true" tabindex="0"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        // ProteusJS Dashboard Demo
+        class ProteusJSDashboardDemo {
+            constructor() {
+                this.metrics = {
+                    renderTime: 0,
+                    activeBreakpoints: [],
+                    memoryUsage: 0,
+                    accessibilityScore: 95
+                };
+                this.isHighContrast = false;
+                this.sidebarOpen = false;
+            }
+            
+            init() {
+                this.setupContainerQueries();
+                this.setupAccessibilityControls();
+                this.setupNavigation();
+                this.updateClock();
+                this.startMetricsUpdates();
+                this.enableKeyboardNavigation();
+            }
+            
+            setupContainerQueries() {
+                // Dashboard container queries
+                const observer = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width;
+                        this.updateDashboardBreakpoints(entry.target, width);
+                    }
+                });
+                
+                observer.observe(document.getElementById('dashboard'));
+                
+                // Widget grid container queries
+                const widgetObserver = new ResizeObserver(entries => {
+                    for (let entry of entries) {
+                        const width = entry.contentRect.width;
+                        this.updateWidgetGridBreakpoints(entry.target, width);
+                    }
+                });
+                
+                observer.observe(document.getElementById('widgetGrid'));
+            }
+            
+            updateDashboardBreakpoints(element, width) {
+                const startTime = performance.now();
+                
+                // Remove all breakpoint classes
+                element.classList.remove('compact', 'comfortable', 'spacious');
+                
+                // Add appropriate breakpoint class
+                const activeBreakpoints = [];
+                if (width < 768) {
+                    element.classList.add('compact');
+                    activeBreakpoints.push('compact');
+                } else if (width < 1024) {
+                    element.classList.add('comfortable');
+                    activeBreakpoints.push('comfortable');
+                } else {
+                    element.classList.add('spacious');
+                    activeBreakpoints.push('spacious');
+                }
+                
+                this.metrics.renderTime = performance.now() - startTime;
+                this.metrics.activeBreakpoints = activeBreakpoints;
+                
+                // Announce layout changes
+                this.announceChange(`Dashboard layout changed to ${activeBreakpoints.join(', ')} view`);
+            }
+            
+            updateWidgetGridBreakpoints(element, width) {
+                // Remove all breakpoint classes
+                element.classList.remove('sm', 'md', 'lg');
+                
+                // Add appropriate breakpoint class
+                if (width >= 400) element.classList.add('sm');
+                if (width >= 600) element.classList.add('md');
+                if (width >= 800) element.classList.add('lg');
+            }
+            
+            setupAccessibilityControls() {
+                // High contrast toggle
+                const contrastToggle = document.getElementById('high-contrast-toggle');
+                contrastToggle.addEventListener('click', () => {
+                    this.toggleHighContrast();
+                });
+                
+                contrastToggle.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.toggleHighContrast();
+                    }
+                });
+                
+                // Screen reader toggle
+                const screenReaderToggle = document.getElementById('screen-reader-toggle');
+                screenReaderToggle.addEventListener('click', () => {
+                    this.toggleScreenReaderMode();
+                });
+                
+                // Keyboard navigation toggle
+                const keyboardToggle = document.getElementById('keyboard-nav-toggle');
+                keyboardToggle.addEventListener('click', () => {
+                    this.toggleKeyboardNavigation();
+                });
+            }
+            
+            setupNavigation() {
+                const menuToggle = document.getElementById('menuToggle');
+                const sidebar = document.getElementById('sidebar');
+                
+                menuToggle.addEventListener('click', () => {
+                    this.sidebarOpen = !this.sidebarOpen;
+                    sidebar.classList.toggle('open', this.sidebarOpen);
+                    
+                    menuToggle.setAttribute('aria-expanded', this.sidebarOpen);
+                    this.announceChange(`Navigation menu ${this.sidebarOpen ? 'opened' : 'closed'}`);
+                });
+                
+                // Close sidebar when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (this.sidebarOpen && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                        this.sidebarOpen = false;
+                        sidebar.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+            
+            toggleHighContrast() {
+                this.isHighContrast = !this.isHighContrast;
+                const toggle = document.getElementById('high-contrast-toggle');
+                
+                document.body.classList.toggle('high-contrast', this.isHighContrast);
+                toggle.classList.toggle('active', this.isHighContrast);
+                toggle.setAttribute('aria-checked', this.isHighContrast);
+                
+                this.announceChange(`High contrast mode ${this.isHighContrast ? 'enabled' : 'disabled'}`);
+            }
+            
+            toggleScreenReaderMode() {
+                const toggle = document.getElementById('screen-reader-toggle');
+                const isActive = toggle.classList.contains('active');
+                
+                toggle.classList.toggle('active');
+                toggle.setAttribute('aria-checked', !isActive);
+                
+                this.announceChange(`Screen reader mode ${!isActive ? 'enabled' : 'disabled'}`);
+            }
+            
+            toggleKeyboardNavigation() {
+                const toggle = document.getElementById('keyboard-nav-toggle');
+                const isActive = toggle.classList.contains('active');
+                
+                toggle.classList.toggle('active');
+                toggle.setAttribute('aria-checked', !isActive);
+                
+                this.announceChange(`Enhanced keyboard navigation ${!isActive ? 'enabled' : 'disabled'}`);
+            }
+            
+            enableKeyboardNavigation() {
+                // Add keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.altKey) {
+                        switch (e.key) {
+                            case 'm':
+                                e.preventDefault();
+                                document.getElementById('menuToggle').click();
+                                break;
+                            case 'c':
+                                e.preventDefault();
+                                this.toggleHighContrast();
+                                break;
+                        }
+                    }
+                });
+                
+                // Enhance focus management
+                const focusableElements = document.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                
+                focusableElements.forEach(element => {
+                    element.addEventListener('focus', () => {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    });
+                });
+            }
+            
+            updateClock() {
+                const timeElement = document.getElementById('currentTime');
+                const now = new Date();
+                timeElement.textContent = now.toLocaleTimeString();
+                
+                setTimeout(() => this.updateClock(), 1000);
+            }
+            
+            startMetricsUpdates() {
+                setInterval(() => {
+                    this.updateMetricsDisplay();
+                }, 1000);
+            }
+            
+            updateMetricsDisplay() {
+                document.getElementById('render-time').textContent = this.metrics.renderTime.toFixed(2);
+                document.getElementById('active-breakpoints').textContent = 
+                    this.metrics.activeBreakpoints.join(', ') || 'none';
+                document.getElementById('memory-usage').textContent = 
+                    (Math.random() * 5 + 10).toFixed(1);
+                document.getElementById('accessibility-score').textContent = 
+                    this.metrics.accessibilityScore + '%';
+            }
+            
+            announceChange(message) {
+                // Create or update live region for screen reader announcements
+                let liveRegion = document.getElementById('proteus-live-region');
+                if (!liveRegion) {
+                    liveRegion = document.createElement('div');
+                    liveRegion.id = 'proteus-live-region';
+                    liveRegion.setAttribute('aria-live', 'polite');
+                    liveRegion.setAttribute('aria-atomic', 'true');
+                    liveRegion.style.cssText = 'position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;';
+                    document.body.appendChild(liveRegion);
+                }
+                
+                liveRegion.textContent = message;
+            }
+        }
+        
+        // Initialize the dashboard demo
+        const dashboard = new ProteusJSDashboardDemo();
+        dashboard.init();
+        
+        // Add keyboard shortcut help
+        console.log('🎹 Keyboard shortcuts:');
+        console.log('Alt + M: Toggle navigation menu');
+        console.log('Alt + C: Toggle high contrast');
+        console.log('📊 This demo showcases ProteusJS container queries in a responsive dashboard');
+    </script>
+</body>
+</html>
