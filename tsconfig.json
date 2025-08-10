@@ -32,7 +32,9 @@
     "tsBuildInfoFile": "./dist/.tsbuildinfo"
   },
   "include": [
-    "src/**/*",
+    "src/index.ts",
+    "src/modules/**/*",
+    "src/tooling/**/*",
     "types/**/*"
   ],
   "exclude": [

@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🌊 ProteusJS
+# 🌊 ProteusJS v1.1.0
 
-**The Modern Web Development Framework for Accessible, Responsive, and High-Performance Applications**
+**Native-first web development primitives that adapt like the sea god himself**
 
-*Shape-shifting responsive design that adapts like the sea god himself*
+*Lightweight, framework-agnostic utilities for modern, accessible, high-performance web applications*
 
 [![npm version](https://img.shields.io/npm/v/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
 [![npm downloads](https://img.shields.io/npm/dm/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
@@ -20,9 +20,18 @@
 
 ---
 
-## 🚀 **What is ProteusJS?**
+## 🚀 **What is ProteusJS v1.1.0?**
 
-ProteusJS is a comprehensive TypeScript library that revolutionizes web development with intelligent layout systems, advanced typography, WCAG-compliant accessibility features, and performance optimizations. Built for modern web development, it offers **container queries**, **fluid typography**, **screen reader support**, and **automated accessibility compliance**.
+ProteusJS v1.1.0 is a complete architectural transformation - from a monolithic framework to a collection of **native-first, tree-shakable modules** that wrap modern web platform features with great developer experience. Each module is lightweight (≤6KB gzipped), framework-agnostic, and designed for **performance**, **accessibility**, and **modern web standards**.
+
+### 🆕 **What's New in v1.1.0**
+
+- **🧩 Modular Architecture**: Import only what you need with subpath exports
+- **🌐 Native-First**: Prefer web standards over JavaScript re-implementations
+- **🎯 Tree-Shakable**: Each module is independently optimized
+- **⚡ Performance-First**: Built-in Core Web Vitals optimizations
+- **♿ Accessibility-First**: WCAG compliance baked in, not bolted on
+- **🔧 Framework Adapters**: React, Vue, and Svelte integrations
 
 ## ✨ **Key Features**
 
@@ -80,40 +89,71 @@ pnpm add @sc4rfurryx/proteusjs
 <script src="https://unpkg.com/@sc4rfurryx/proteusjs@latest/dist/proteus.min.js"></script>
 ```
 
-### ⚡ **Basic Usage**
+### ⚡ **Basic Usage (v1.1.0 Modular API)**
 
 ```typescript
-import { ProteusJS } from '@sc4rfurryx/proteusjs';
+// 🧩 Import only what you need (tree-shakable)
+import { transition, navigate } from '@sc4rfurryx/proteusjs/transitions';
+import { tether } from '@sc4rfurryx/proteusjs/anchor';
+import { attach } from '@sc4rfurryx/proteusjs/popover';
+import { boost } from '@sc4rfurryx/proteusjs/perf';
 
-// Initialize ProteusJS
-const proteus = new ProteusJS();
-
-// 🎯 Create responsive container
-proteus.container('.hero-section', {
-  breakpoints: {
-    sm: '320px',
-    md: '768px',
-    lg: '1024px'
-  }
+// 🎬 View Transitions
+await transition(() => {
+  document.body.classList.toggle('dark-mode');
 });
 
-// 📝 Apply fluid typography
-proteus.fluidType('h1, h2, h3', {
-  minSize: 16,
-  maxSize: 32,
-  accessibility: 'AAA'
+// ⚓ Anchor Positioning
+const controller = tether(floatingEl, {
+  anchor: anchorEl,
+  placement: 'bottom',
+  align: 'center'
 });
 
-// ♿ Enable accessibility features
-proteus.enableAccessibility(document.body, {
-  wcagLevel: 'AA',
-  screenReader: true,
-  cognitiveAccessibility: true
+// 🎭 Popover/Dialog
+const popover = attach(triggerEl, panelEl, {
+  type: 'menu',
+  trapFocus: true
 });
+
+// ⚡ Performance Boost
+boost.contentVisibility('.lazy-content');
+boost.speculate({ prerender: ['/next-page'] });
+```
+
+### 🧩 **All Available Modules**
+
+```typescript
+// 🎬 View Transitions API
+import { transition, navigate } from '@sc4rfurryx/proteusjs/transitions';
+
+// 📜 Scroll-driven Animations
+import { scrollAnimate, scrollTimeline } from '@sc4rfurryx/proteusjs/scroll';
+
+// ⚓ CSS Anchor Positioning
+import { tether, anchor } from '@sc4rfurryx/proteusjs/anchor';
+
+// 🎭 HTML Popover API
+import { attach, dialog } from '@sc4rfurryx/proteusjs/popover';
+
+// 📦 Container Queries
+import { defineContainer, observe } from '@sc4rfurryx/proteusjs/container';
+
+// 🔤 Fluid Typography
+import { fluidType, typeScale } from '@sc4rfurryx/proteusjs/typography';
+
+// 🔍 A11y Auditing (dev-only)
+import { audit } from '@sc4rfurryx/proteusjs/a11y-audit';
+
+// ♿ A11y Primitives
+import { dialog, tooltip, combobox, tabs, menu } from '@sc4rfurryx/proteusjs/a11y-primitives';
+
+// ⚡ Performance Guardrails
+import { boost } from '@sc4rfurryx/proteusjs/perf';
 ```
 
 <details>
-<summary>🎨 <strong>See it in action</strong></summary>
+<summary>🎨 <strong>Complete Example</strong></summary>
 
 ```html
 <!DOCTYPE html>
@@ -121,23 +161,41 @@ proteus.enableAccessibility(document.body, {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProteusJS Demo</title>
+    <title>ProteusJS v1.1.0 Demo</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Responsive Typography</h1>
-        <p>This content adapts to container size and maintains accessibility.</p>
+    <div class="hero-container">
+        <h1>Modern Web Development</h1>
+        <p>Native-first, accessible, performant.</p>
+        <button id="theme-toggle">Toggle Theme</button>
     </div>
 
     <script type="module">
-        import { ProteusJS } from '@sc4rfurryx/proteusjs';
+        import { transition } from '@sc4rfurryx/proteusjs/transitions';
+        import { defineContainer } from '@sc4rfurryx/proteusjs/container';
+        import { fluidType } from '@sc4rfurryx/proteusjs/typography';
+        import { boost } from '@sc4rfurryx/proteusjs/perf';
 
-        const proteus = new ProteusJS();
-        proteus.autoOptimize(document.body, {
-            typography: { accessibility: 'AAA' },
-            accessibility: { wcagLevel: 'AA' },
-            container: { breakpoints: { sm: '300px', lg: '800px' } }
+        // Container queries
+        defineContainer('.hero-container', {
+          name: 'hero',
+          type: 'inline-size'
         });
+
+        // Fluid typography
+        const { css } = fluidType(1, 2.5, { lineHeight: 1.5 });
+        document.head.insertAdjacentHTML('beforeend', `<style>h1 { ${css} }</style>`);
+
+        // View transitions
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+          transition(() => {
+            document.body.classList.toggle('dark-theme');
+          });
+        });
+
+        // Performance optimizations
+        boost.contentVisibility('.hero-container');
+        boost.speculate({ prefetch: ['/about', '/contact'] });
     </script>
 </body>
 </html>
@@ -210,66 +268,262 @@ Experience ProteusJS in action with our comprehensive real-world examples:
 ## 📚 **API Documentation**
 
 <details>
-<summary>🎯 <strong>Container Queries API</strong></summary>
+<summary>🎬 <strong>Transitions Module</strong></summary>
 
-### `container(selector, options)`
-Creates responsive containers with element-based breakpoints.
+### `transition(callback, options?)`
+Wraps View Transitions API with fallbacks.
 
 ```typescript
-proteus.container('.sidebar', {
-  breakpoints: {
-    sm: '200px',
-    md: '400px',
-    lg: '600px'
-  },
-  containerType: 'inline-size',
-  announceChanges: true, // Screen reader announcements
-  callbacks: {
-    breakpointChange: (breakpoint, active) => {
-      console.log(`Breakpoint ${breakpoint} is now ${active ? 'active' : 'inactive'}`);
-    }
-  }
+import { transition, navigate } from '@sc4rfurryx/proteusjs/transitions';
+
+// Basic transition
+await transition(() => {
+  document.body.classList.toggle('dark-mode');
+});
+
+// Navigation with transition
+await navigate('/new-page', {
+  fallback: 'fade',
+  duration: 300
 });
 ```
 
 </details>
 
 <details>
-<summary>📝 <strong>Typography API</strong></summary>
+<summary>⚓ <strong>Anchor Module</strong></summary>
 
-### `fluidType(selector, options)`
-Applies fluid typography with accessibility compliance.
+### `tether(floating, options)`
+CSS Anchor Positioning with JS fallback.
 
 ```typescript
-proteus.fluidType('p, li', {
-  minSize: 14,
-  maxSize: 18,
-  minContainer: 320,
-  maxContainer: 1200,
-  accessibility: 'AAA', // Enforces 1.5+ line height
-  unit: 'rem'
+import { tether } from '@sc4rfurryx/proteusjs/anchor';
+
+const controller = tether(floatingEl, {
+  anchor: anchorEl,
+  placement: 'bottom-start',
+  offset: 8,
+  flip: true,
+  shift: true
+});
+
+// Cleanup
+controller.destroy();
+```
+
+</details>
+
+<details>
+<summary>🎭 <strong>Popover Module</strong></summary>
+
+### `attach(trigger, panel, options)`
+HTML Popover API with accessibility.
+
+```typescript
+import { attach } from '@sc4rfurryx/proteusjs/popover';
+
+const popover = attach(triggerEl, panelEl, {
+  type: 'menu',
+  trigger: 'click',
+  trapFocus: true,
+  restoreFocus: true,
+  closeOnEscape: true
 });
 ```
 
 </details>
 
 <details>
-<summary>♿ <strong>Accessibility API</strong></summary>
+<summary>📦 <strong>Container Module</strong></summary>
 
-### `enableAccessibility(element, options)`
-Enables comprehensive accessibility features.
+### `defineContainer(selector, options)`
+Container queries with dev visualization.
 
 ```typescript
-proteus.enableAccessibility(document.main, {
-  wcagLevel: 'AAA',
-  screenReader: true,
-  keyboardNavigation: true,
-  cognitiveAccessibility: true,
-  enhanceErrorMessages: true,
-  showReadingTime: true,
-  simplifyContent: true,
-  readingLevel: 'elementary'
+import { defineContainer } from '@sc4rfurryx/proteusjs/container';
+
+defineContainer('.sidebar', {
+  name: 'sidebar',
+  type: 'inline-size'
 });
+
+// CSS: @container sidebar (min-width: 300px) { ... }
+```
+
+</details>
+
+<details>
+<summary>🔤 <strong>Typography Module</strong></summary>
+
+### `fluidType(minRem, maxRem, options?)`
+Generates CSS clamp() for fluid typography.
+
+```typescript
+import { fluidType } from '@sc4rfurryx/proteusjs/typography';
+
+const { css } = fluidType(1, 2.5, {
+  minViewportPx: 320,
+  maxViewportPx: 1200,
+  lineHeight: 1.5
+});
+
+// Returns: font-size: clamp(1rem, 4vw + 0.5rem, 2.5rem); line-height: 1.5;
+```
+
+</details>
+
+<details>
+<summary>♿ <strong>A11y Primitives Module</strong></summary>
+
+### Headless accessibility patterns
+
+```typescript
+import { dialog, tooltip, combobox, tabs, menu } from '@sc4rfurryx/proteusjs/a11y-primitives';
+
+// Modal dialog
+const dialogController = dialog(dialogEl, {
+  modal: true,
+  trapFocus: true,
+  restoreFocus: true
+});
+
+// Accessible tooltip
+const tooltipController = tooltip(triggerEl, tooltipEl, {
+  delay: 500,
+  placement: 'top'
+});
+
+// Keyboard-navigable tabs
+const tabsController = tabs(tabsContainerEl);
+```
+
+</details>
+
+<details>
+<summary>⚡ <strong>Performance Module</strong></summary>
+
+### `boost` object with performance utilities
+
+```typescript
+import { boost } from '@sc4rfurryx/proteusjs/perf';
+
+// Content visibility optimization
+boost.contentVisibility('.lazy-section', 'auto', {
+  containIntrinsicSize: '600px 400px'
+});
+
+// Resource priority hints
+boost.fetchPriority('img.hero', 'high');
+
+// Speculation rules
+boost.speculate({
+  prerender: ['/pricing'],
+  prefetch: ['/blog'],
+  sameOriginOnly: true
+});
+
+// Yield to browser
+await boost.yieldToBrowser();
+```
+
+</details>
+
+---
+
+## 🔧 **Framework Adapters**
+
+<details>
+<summary>⚛️ <strong>React Adapter</strong></summary>
+
+```typescript
+import { useTransition, usePopover, useAnchor } from '@sc4rfurryx/proteusjs/adapters/react';
+
+function MyComponent() {
+  const [isTransitioning, startTransition] = useTransition();
+
+  const { triggerRef, panelRef, isOpen, toggle } = usePopover({
+    type: 'menu',
+    trapFocus: true
+  });
+
+  const { floatingRef, anchorRef } = useAnchor({
+    placement: 'bottom',
+    offset: 8
+  });
+
+  return (
+    <div>
+      <button
+        ref={triggerRef}
+        onClick={() => startTransition(() => toggle())}
+      >
+        Toggle Menu
+      </button>
+      <div ref={panelRef} hidden={!isOpen}>
+        Menu content
+      </div>
+    </div>
+  );
+}
+```
+
+</details>
+
+<details>
+<summary>🟢 <strong>Vue Adapter</strong></summary>
+
+```vue
+<template>
+  <div>
+    <button @click="startTransition(() => toggle())">
+      Toggle Menu
+    </button>
+    <div v-show="isOpen" ref="panelRef">
+      Menu content
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { useTransition, usePopover } from '@sc4rfurryx/proteusjs/adapters/vue';
+
+const { isTransitioning, startTransition } = useTransition();
+const { triggerRef, panelRef, isOpen, toggle } = usePopover({
+  type: 'menu',
+  trapFocus: true
+});
+</script>
+```
+
+</details>
+
+<details>
+<summary>🧡 <strong>Svelte Adapter</strong></summary>
+
+```svelte
+<script>
+  import { proteusTransition, proteusPopover } from '@sc4rfurryx/proteusjs/adapters/svelte';
+
+  let isOpen = false;
+</script>
+
+<button
+  use:proteusTransition={{
+    callback: () => isOpen = !isOpen
+  }}
+>
+  Toggle Menu
+</button>
+
+<div
+  use:proteusPopover={{
+    type: 'menu',
+    isOpen,
+    trapFocus: true
+  }}
+>
+  Menu content
+</div>
 ```
 
 </details>

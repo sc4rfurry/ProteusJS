@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS v1.1.0 - Basic Usage Examples</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            container-type: inline-size;
+            container-name: main;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin: 0 0 1rem 0;
+            background: linear-gradient(45deg, #fff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .examples-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        @container main (min-width: 768px) {
+            .examples-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @container main (min-width: 1024px) {
+            .examples-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .example-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .example-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .demo-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+        
+        .demo-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .tooltip {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            position: absolute;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tooltip.visible {
+            opacity: 1;
+        }
+        
+        .popover-panel {
+            background: white;
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+        }
+        
+        .anchor-demo {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .floating-element {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            position: absolute;
+            z-index: 100;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(180deg);
+        }
+        
+        .dark-theme {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        .performance-demo {
+            height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .lazy-content {
+            height: 150px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            margin: 1rem 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+    
+    <div class="container">
+        <div class="hero">
+            <h1>ProteusJS v1.1.0</h1>
+            <p>Native-first web development primitives that adapt like the sea god himself</p>
+        </div>
+        
+        <div class="examples-grid">
+            <!-- View Transitions Example -->
+            <div class="example-card">
+                <h3>🎬 View Transitions</h3>
+                <p>Smooth page transitions with the View Transitions API</p>
+                <button class="demo-button" id="transitionDemo">Try Transition</button>
+            </div>
+            
+            <!-- Anchor Positioning Example -->
+            <div class="example-card">
+                <h3>⚓ Anchor Positioning</h3>
+                <p>CSS Anchor Positioning with JavaScript fallback</p>
+                <div class="anchor-demo">
+                    <button class="demo-button" id="anchorTrigger">Anchor Me</button>
+                    <div class="floating-element" id="floatingEl" style="display: none;">
+                        I'm anchored to the button!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Popover Example -->
+            <div class="example-card">
+                <h3>🎭 Popover API</h3>
+                <p>HTML Popover API with accessibility features</p>
+                <button class="demo-button" id="popoverTrigger">Open Popover</button>
+                <div class="popover-panel" id="popoverPanel" style="display: none;">
+                    <h4>Accessible Popover</h4>
+                    <p>This popover has proper focus management and keyboard navigation.</p>
+                    <button onclick="document.getElementById('popoverPanel').style.display='none'">Close</button>
+                </div>
+            </div>
+            
+            <!-- Tooltip Example -->
+            <div class="example-card">
+                <h3>💬 Accessible Tooltips</h3>
+                <p>WCAG compliant tooltips with proper ARIA</p>
+                <button class="demo-button" id="tooltipTrigger">Hover for tooltip</button>
+                <div class="tooltip" id="tooltip">This is an accessible tooltip!</div>
+            </div>
+            
+            <!-- Performance Example -->
+            <div class="example-card">
+                <h3>⚡ Performance Boost</h3>
+                <p>Content visibility and performance optimizations</p>
+                <div class="performance-demo" id="perfDemo">
+                    <div class="lazy-content">Lazy Content 1</div>
+                    <div class="lazy-content">Lazy Content 2</div>
+                    <div class="lazy-content">Lazy Content 3</div>
+                </div>
+            </div>
+            
+            <!-- Typography Example -->
+            <div class="example-card">
+                <h3>🔤 Fluid Typography</h3>
+                <p>Responsive typography that scales beautifully</p>
+                <div style="font-size: clamp(1rem, 4vw, 2rem); line-height: 1.4;">
+                    This text scales fluidly with the container size!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import ProteusJS modules
+        import { transition } from '../dist/modules/transitions.esm.js';
+        import { tether } from '../dist/modules/anchor.esm.js';
+        import { attach } from '../dist/modules/popover.esm.js';
+        import { tooltip } from '../dist/modules/a11y-primitives.esm.js';
+        import { boost } from '../dist/modules/perf.esm.js';
+        import { defineContainer } from '../dist/modules/container.esm.js';
+
+        // Container queries setup
+        defineContainer('.container', { name: 'main', type: 'inline-size' });
+
+        // View Transitions Demo
+        document.getElementById('transitionDemo').addEventListener('click', async () => {
+            await transition(() => {
+                document.body.classList.toggle('dark-theme');
+                const button = document.getElementById('themeToggle');
+                button.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+            });
+        });
+
+        // Theme Toggle
+        document.getElementById('themeToggle').addEventListener('click', async () => {
+            await transition(() => {
+                document.body.classList.toggle('dark-theme');
+                const button = document.getElementById('themeToggle');
+                button.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+            });
+        });
+
+        // Anchor Positioning Demo
+        const anchorController = tether(document.getElementById('floatingEl'), {
+            anchor: document.getElementById('anchorTrigger'),
+            placement: 'bottom',
+            offset: 8
+        });
+
+        document.getElementById('anchorTrigger').addEventListener('click', () => {
+            const floatingEl = document.getElementById('floatingEl');
+            if (floatingEl.style.display === 'none') {
+                floatingEl.style.display = 'block';
+                anchorController.update();
+            } else {
+                floatingEl.style.display = 'none';
+            }
+        });
+
+        // Popover Demo
+        const popoverController = attach(
+            document.getElementById('popoverTrigger'),
+            document.getElementById('popoverPanel'),
+            {
+                type: 'menu',
+                trigger: 'click',
+                trapFocus: true
+            }
+        );
+
+        // Tooltip Demo
+        const tooltipController = tooltip(
+            document.getElementById('tooltipTrigger'),
+            document.getElementById('tooltip'),
+            {
+                delay: 300,
+                placement: 'top'
+            }
+        );
+
+        // Performance Demo
+        boost.contentVisibility('.lazy-content', 'auto');
+        boost.speculate({
+            prefetch: ['/docs', '/examples'],
+            sameOriginOnly: true
+        });
+
+        console.log('🌊 ProteusJS v1.1.0 examples loaded successfully!');
+    </script>
+</body>
+</html>

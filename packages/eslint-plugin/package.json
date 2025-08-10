@@ -1,0 +1,43 @@
+{
+  "name": "@sc4rfurryx/proteusjs-eslint-plugin",
+  "version": "1.1.0",
+  "description": "ESLint plugin for ProteusJS - container queries, ARIA, and popover safety rules",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "proteus",
+    "eslint",
+    "plugin",
+    "accessibility",
+    "web-development"
+  ],
+  "author": "sc4rfurry",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4rfurry/ProteusJS.git",
+    "directory": "packages/eslint-plugin"
+  },
+  "peerDependencies": {
+    "eslint": "^8.0.0 || ^9.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

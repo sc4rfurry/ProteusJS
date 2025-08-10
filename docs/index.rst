@@ -1,5 +1,5 @@
-ProteusJS Documentation
-=======================
+ProteusJS v1.1.0 Documentation
+===============================
 
 .. image:: https://img.shields.io/npm/v/@sc4rfurryx/proteusjs.svg
    :target: https://www.npmjs.com/package/@sc4rfurryx/proteusjs
@@ -13,30 +13,60 @@ ProteusJS Documentation
    :target: https://github.com/sc4rfurry/ProteusJS/blob/main/LICENSE
    :alt: License
 
-**ProteusJS** is a modern, shape-shifting responsive design library that adapts like the sea god himself. It provides intelligent container queries, fluid typography, comprehensive accessibility features, and performance optimization for the modern web.
+**ProteusJS v1.1.0** is a collection of native-first, tree-shakable web development primitives that wrap modern web platform features with excellent developer experience. Each module is lightweight (≤6KB gzipped), framework-agnostic, and designed for performance, accessibility, and modern web standards.
 
-🌊 **Shape-shifting responsive design that adapts to any container**
+🌊 **Native-first web development primitives that adapt like the sea god himself**
 
 Key Features
 ------------
 
-🎯 **Container Queries**
-   True container-based responsive design, not viewport-dependent
+🧩 **Modular Architecture**
+   Import only what you need with subpath exports
 
-📝 **Fluid Typography**
-   Intelligent text scaling with WCAG AAA accessibility compliance
+🌐 **Native-First**
+   Prefer web standards over JavaScript re-implementations
 
-♿ **Accessibility First**
-   Built-in WCAG 2.1 compliance with screen reader support
+🎯 **Tree-Shakable**
+   Each module is independently optimized (≤6KB gzipped)
 
-⚡ **Performance Optimized**
-   Advanced caching, lazy evaluation, and memory management
+⚡ **Performance-First**
+   Built-in Core Web Vitals optimizations
 
-🎨 **Framework Agnostic**
-   Works with React, Vue, Angular, or vanilla JavaScript
+♿ **Accessibility-First**
+   WCAG compliance baked in, not bolted on
 
-🔧 **Zero Configuration**
-   Intelligent defaults with extensive customization options
+🔧 **Framework Adapters**
+   React, Vue, and Svelte integrations included
+
+Available Modules
+-----------------
+
+🎬 **Transitions**
+   View Transitions API wrapper with fallbacks
+
+📜 **Scroll**
+   Scroll-driven animations with Intersection Observer fallback
+
+⚓ **Anchor**
+   CSS Anchor Positioning with JavaScript fallback
+
+🎭 **Popover**
+   HTML Popover API wrapper with accessibility
+
+📦 **Container**
+   Container queries with dev visualization
+
+🔤 **Typography**
+   Fluid typography with CSS clamp()
+
+🔍 **A11y Audit**
+   Accessibility auditing (dev-only)
+
+♿ **A11y Primitives**
+   Headless accessibility patterns
+
+⚡ **Performance**
+   Performance guardrails and optimizations
 
 Quick Start
 -----------
