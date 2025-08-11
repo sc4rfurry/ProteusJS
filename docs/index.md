@@ -10,14 +10,14 @@ ProteusJS v2.0.0 provides modern web platform APIs, enhanced accessibility, perf
 ProteusJS adapts to your needs like Proteus, the ancient Greek sea god who could change his shape at will. Our library provides modern web platform APIs with intelligent fallbacks, ensuring your applications work seamlessly across all browsers and devices.
 ```
 
-## 🚀 **What's New in v2.0.0**
+## 🚀 What's New in v2.0.0
 
-- **🧭 Navigation API**: Modern routing with History API fallback
-- **✨ View Transitions**: Smooth page transitions with CSS fallbacks
-- **📱 Popover API**: Advanced positioning with CSS Anchor support
-- **⚡ Scheduler API**: Performance optimization with task prioritization
-- **🔧 PWA Features**: File System, Badging, and Web Share APIs
-- **🚀 Speculation Rules**: Intelligent prefetching for faster navigation
+- 🧭 **Navigation API**: Modern routing with History API fallback
+- ✨ **View Transitions**: Smooth page transitions with CSS fallbacks
+- 📱 **Popover API**: Advanced positioning with CSS Anchor support
+- ⚡ **Scheduler API**: Performance optimization with task prioritization
+- 🔧 **PWA Features**: File System, Badging, and Web Share APIs
+- 🚀 **Speculation Rules**: Intelligent prefetching for faster navigation
 
 <div class="feature-grid">
 
@@ -43,6 +43,36 @@ WCAG 2.1 AAA compliance built-in with comprehensive screen reader support and ke
 </div>
 
 </div>
+
+## Quick Start
+
+### Installation
+
+Install ProteusJS via npm:
+
+    npm install @sc4rfurryx/proteusjs
+
+### Basic Usage
+
+Import only what you need:
+
+    // Import specific modules
+    import { transition } from '@sc4rfurryx/proteusjs/transitions';
+    import { tether } from '@sc4rfurryx/proteusjs/anchor';
+    import { boost } from '@sc4rfurryx/proteusjs/perf';
+
+### CDN Usage
+
+For CDN usage, use import maps:
+
+    <script type="importmap">
+    {
+      "imports": {
+        "@sc4rfurryx/proteusjs/transitions":
+          "https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs@2.0.0/dist/modules/transitions.esm.js"
+      }
+    }
+    </script>
 
 ```{toctree}
 :maxdepth: 2
@@ -78,73 +108,35 @@ v2/api/README
 v2/migration-guide
 ```
 
-## Quick Start
-
-### Installation
-
-```bash
-npm install @sc4rfurryx/proteusjs
-```
-
-### Tree-shakable Imports
-
-```javascript
-// Import only what you need
-import { transition } from '@sc4rfurryx/proteusjs/transitions';
-import { tether } from '@sc4rfurryx/proteusjs/anchor';
-import { boost } from '@sc4rfurryx/proteusjs/perf';
-```
-
-### CDN Usage
-
-```html
-<script type="importmap">
-{
-  "imports": {
-    "@sc4rfurryx/proteusjs/transitions": 
-      "https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs@2.0.0/dist/modules/transitions.esm.js"
-  }
-}
-</script>
-```
-
 ## Core Modules
 
 ### 🎬 View Transitions
 Smooth page transitions with native View Transitions API fallback.
 
-```javascript
-import { transition } from '@sc4rfurryx/proteusjs/transitions';
+Example usage:
 
-// Basic transition
-await transition(() => {
-  document.body.classList.toggle('dark-theme');
-});
+    import { transition } from '@sc4rfurryx/proteusjs/transitions';
 
-// With custom name
-await transition(() => {
-  updateContent();
-}, { name: 'slide-in' });
-```
+    // Basic transition
+    await transition(() => {
+      document.body.classList.toggle('dark-theme');
+    });
 
 ### ⚓ Anchor Positioning
 CSS Anchor Positioning with JavaScript fallback for unsupported browsers.
 
-```javascript
-import { tether } from '@sc4rfurryx/proteusjs/anchor';
+Example usage:
 
-const tooltip = document.getElementById('tooltip');
-const button = document.getElementById('button');
+    import { tether } from '@sc4rfurryx/proteusjs/anchor';
 
-const controller = tether(tooltip, {
-  anchor: button,
-  placement: 'top',
-  offset: 8
-});
+    const tooltip = document.getElementById('tooltip');
+    const button = document.getElementById('button');
 
-// Update position
-controller.update();
-```
+    const controller = tether(tooltip, {
+      anchor: button,
+      placement: 'top',
+      offset: 8
+    });
 
 **Browser Compatibility:**
 - ✅ Chrome 125+ (native CSS anchor positioning)
@@ -154,55 +146,29 @@ controller.update();
 ### 📦 Container Queries
 Modern container-based responsive design.
 
-```javascript
-import { container } from '@sc4rfurryx/proteusjs/container';
+Example usage:
 
-// Enable container queries
-container('.card', {
-  type: 'inline-size',
-  name: 'card-container'
-});
-```
+    import { container } from '@sc4rfurryx/proteusjs/container';
 
-**CSS Usage with correct units:**
-```css
-.card {
-  container-type: inline-size;
-  container-name: card-container;
-}
-
-@container card-container (min-width: 300px) {
-  .card-content {
-    /* Use correct container query units */
-    width: 50cqw;  /* 50% of container width */
-    height: 25cqh; /* 25% of container height */
-    padding: 2cqi; /* 2% of container inline size */
-    margin: 1cqb;  /* 1% of container block size */
-  }
-}
-```
-
-**Important:** Use `cqw`, `cqh`, `cqi`, `cqb` units (not `50 cw` syntax).
+    // Enable container queries
+    container('.card', {
+      type: 'inline-size',
+      name: 'card-container'
+    });
 
 ### ⚡ Performance
 Web performance optimization utilities.
 
-```javascript
-import { boost } from '@sc4rfurryx/proteusjs/perf';
+Example usage:
 
-// Content visibility optimization
-boost.contentVisibility('.lazy-content', 'auto');
+    import { boost } from '@sc4rfurryx/proteusjs/perf';
 
-// Measure Core Web Vitals
-const metrics = await boost.measureCWV();
-console.log(`CLS: ${metrics.cls}, FID: ${metrics.fid}ms, LCP: ${metrics.lcp}s`);
+    // Content visibility optimization
+    boost.contentVisibility('.lazy-content', 'auto');
 
-// Speculation rules for preloading
-boost.speculate({
-  prerender: ['/next-page'],
-  prefetch: ['/api/data']
-});
-```
+    // Measure Core Web Vitals
+    const metrics = await boost.measureCWV();
+    console.log(`CLS: ${metrics.cls}, FID: ${metrics.fid}ms, LCP: ${metrics.lcp}s`);
 
 ### 🎯 Typography
 Responsive typography with fluid scaling.
@@ -245,84 +211,17 @@ const modal = dialog('#modal', {
 // Tooltip with ARIA
 const tip = tooltip(trigger, content, { delay: 300 });
 
-// Focus trap for modals
-const trap = focusTrap(container);
-trap.activate();
-```
+    // Focus trap for modals
+    const trap = focusTrap(container);
+    trap.activate();
 
-## Framework Adapters
+## Framework Support
 
-### React
-```javascript
-import { useTransition, usePopover } from '@sc4rfurryx/proteusjs/adapters/react';
-
-function MyComponent() {
-  const [startTransition] = useTransition();
-  
-  const handleClick = () => {
-    startTransition(() => {
-      setTheme(theme === 'light' ? 'dark' : 'light');
-    });
-  };
-  
-  return <button onClick={handleClick}>Toggle Theme</button>;
-}
-```
-
-### Vue
-```javascript
-import { useTransition } from '@sc4rfurryx/proteusjs/adapters/vue';
-
-export default {
-  setup() {
-    const { transition } = useTransition();
-    
-    const toggleTheme = () => {
-      transition(() => {
-        // Update theme
-      });
-    };
-    
-    return { toggleTheme };
-  }
-};
-```
-
-### Svelte
-```javascript
-import { proteusTransition } from '@sc4rfurryx/proteusjs/adapters/svelte';
-
-let theme = 'light';
-
-function toggleTheme() {
-  proteusTransition(() => {
-    theme = theme === 'light' ? 'dark' : 'light';
-  });
-}
-```
+ProteusJS provides adapters for React, Vue, Svelte, and other popular frameworks with the same API.
 
 ## Browser Support
 
-| Feature | Chrome | Firefox | Safari | Edge |
-|---------|--------|---------|--------|------|
-| View Transitions | 111+ | Fallback | Fallback | 111+ |
-| Anchor Positioning | 125+ | Fallback | Fallback | 125+ |
-| Container Queries | 105+ | 110+ | 16+ | 105+ |
-| Content Visibility | 85+ | Fallback | Fallback | 85+ |
-
-## Bundle Sizes
-
-All modules are optimized for minimal bundle impact:
-
-- **transitions**: ~3.5KB
-- **anchor**: ~7.8KB  
-- **container**: ~6.0KB
-- **perf**: ~8.2KB
-- **typography**: ~6.2KB
-- **a11y-audit**: ~2.2KB (dev-only)
-- **a11y-primitives**: ~3.8KB
-
-*Sizes are uncompressed. Gzipped sizes are typically 60-70% smaller.*
+ProteusJS works across all modern browsers with intelligent fallbacks for unsupported features.
 
 ## License
 
