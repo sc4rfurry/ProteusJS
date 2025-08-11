@@ -9,6 +9,12 @@ sphinx-tabs>=3.4.0
 # Markdown support - MyST parser (stable version)
 myst-parser>=0.18.0,<2.0.0
 
+# MyST parser dependencies for extensions
+linkify-it-py>=2.0.0
+markdown-it-py>=2.2.0
+mdit-py-plugins>=0.3.0
+html5lib>=1.1
+
 # Additional extensions for enhanced functionality
 sphinx-design>=0.3.0
 sphinx-external-toc>=0.3.0

@@ -51,7 +51,9 @@ templates_path = ['_templates']
 exclude_patterns = [
     '_build',
     'Thumbs.db',
-    '.DS_Store'
+    '.DS_Store',
+    '__pycache__',
+    '*.pyc'
 ]
 
 # The suffix(es) of source filenames.
@@ -90,7 +92,6 @@ html_theme = 'sphinx_rtd_theme'
 
 # Enhanced theme options for ProteusJS v2.0.0 branding
 html_theme_options = {
-    'canonical_url': 'https://proteusjs.readthedocs.io/',
     'analytics_id': '',  # Add Google Analytics ID if needed
     'logo_only': False,
     'display_version': True,
@@ -108,6 +109,9 @@ html_theme_options = {
     'github_url': 'https://github.com/sc4rfurry/ProteusJS',
     'twitter_url': 'https://twitter.com/proteusjs',
 }
+
+# Use html_baseurl instead of deprecated canonical_url
+html_baseurl = 'https://proteusjs.readthedocs.io/'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

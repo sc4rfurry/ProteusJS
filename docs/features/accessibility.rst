@@ -1,5 +1,5 @@
 Accessibility Features
-====================
+======================
 
 ProteusJS is built with accessibility as a core principle, not an afterthought. Every feature is designed to meet or exceed WCAG 2.1 guidelines while providing an excellent user experience for all users.
 
