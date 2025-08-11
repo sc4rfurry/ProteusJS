@@ -23,6 +23,10 @@ author = 'sc4rfurry'
 release = '2.0.0'
 version = '2.0.0'
 
+# Enhanced project title with branding
+html_title = f'{project} v{version} Documentation'
+html_short_title = 'ProteusJS'
+
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -93,14 +97,14 @@ html_theme = 'sphinx_rtd_theme'
 # Enhanced theme options for ProteusJS v2.0.0 branding
 html_theme_options = {
     'analytics_id': '',  # Add Google Analytics ID if needed
-    'logo_only': False,
+    'logo_only': True,  # Show only logo, not project name
     'display_version': True,
     'prev_next_buttons_location': 'bottom',
     'style_external_links': False,
     'vcs_pageview_mode': '',
     'style_nav_header_background': '#667eea',
     # Enhanced navigation options
-    'collapse_navigation': True,
+    'collapse_navigation': False,  # Keep navigation expanded for better UX
     'sticky_navigation': True,
     'navigation_depth': 4,
     'includehidden': True,
@@ -234,6 +238,14 @@ html_context = {
 # Logo configuration - Professional SVG logo system
 html_logo = '_static/images/logo.svg'
 html_favicon = '_static/images/favicon.svg'
+
+# Note: logo_only already set in html_theme_options above
+
+# Ensure logo displays properly
+html_static_path = ['_static']
+html_css_files = [
+    'css/custom.css',
+]
 
 # Enhanced HTML context for ProteusJS v2.0.0
 html_context = {

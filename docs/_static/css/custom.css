@@ -138,10 +138,58 @@ body::before {
   box-shadow: var(--proteus-shadow);
 }
 
+/* Logo styling for better visibility */
+.wy-side-nav-search .wy-dropdown > a img,
+.wy-side-nav-search > a img {
+  max-height: 45px;
+  width: auto;
+  margin: 0;
+  padding: var(--proteus-space-2);
+  background: white;
+  border-radius: var(--proteus-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block !important; /* Force logo display */
+}
+
+/* Ensure logo container has proper styling */
+.wy-side-nav-search > a {
+  display: block !important;
+  text-align: center;
+  padding: var(--proteus-space-4);
+}
+
+/* Force logo visibility in RTD theme */
+.wy-side-nav-search .wy-dropdown > a,
+.wy-side-nav-search > a {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Logo in navigation top - enhance existing rule */
+.wy-nav-top a {
+  display: flex !important;
+  align-items: center;
+  gap: var(--proteus-space-2);
+  position: relative;
+  z-index: 10; /* Above shimmer effect */
+}
+
 .wy-side-nav-search {
   background: white;
   border-bottom: 1px solid var(--proteus-gray-200);
   padding: var(--proteus-space-4);
+  text-align: center;
+}
+
+/* Ensure logo is visible and properly sized */
+.wy-side-nav-search a[href="/"] img,
+.wy-side-nav-search a[href="index.html"] img {
+  max-width: 180px;
+  max-height: 45px;
+  width: auto;
+  height: auto;
+  display: block !important;
+  margin: 0 auto;
 }
 
 .wy-side-nav-search input[type=text] {
@@ -214,11 +262,11 @@ body::before {
 /* Enhanced code blocks with modern styling */
 .highlight {
   border-radius: var(--proteus-radius-lg);
-  border: 1px solid var(--proteus-gray-200);
+  border: 1px solid rgba(102, 126, 234, 0.2);
   box-shadow: var(--proteus-shadow);
   overflow: hidden;
   position: relative;
-  background: var(--proteus-gray-900);
+  background: #1e1e1e; /* Dark background for code */
   margin: var(--proteus-space-4) 0;
 }
 
@@ -329,6 +377,11 @@ code {
 
 .admonition.tip::before {
   background: var(--proteus-success);
+}
+
+.admonition.tip {
+  background: rgba(34, 197, 94, 0.05); /* Light green background */
+  border-left: 4px solid var(--proteus-success);
 }
 
 .admonition.danger::before {
@@ -506,6 +559,36 @@ a[href^="http"]:not([href*="proteusjs"]):not([href*="readthedocs"])::after {
   /* Don't override text color - let RTD theme handle it */
 }
 
+/* Index page specific styling */
+.wy-nav-content h1:first-child {
+  text-align: center;
+  margin-bottom: var(--proteus-space-6);
+  color: var(--proteus-primary) !important;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.wy-nav-content > .section > p:first-of-type {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: var(--proteus-space-8);
+  color: inherit;
+  font-weight: 500;
+}
+
+/* Ensure index page content is properly contained */
+.wy-nav-content .document .section {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Fix any overflow issues on index page */
+.wy-nav-content .document {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--proteus-font-family);
   font-weight: 700;
@@ -643,11 +726,26 @@ h6 {
   /* Don't override RTD theme background - let it handle light/dark modes */
   min-height: 100vh;
   color: inherit; /* Use RTD theme text color */
+  padding: var(--proteus-space-6);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .wy-nav-content-wrap {
   /* Don't override RTD theme background */
   background: inherit;
+}
+
+/* Ensure index page content displays properly */
+.wy-nav-content .section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix any layout issues with main content */
+.wy-nav-content .document {
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Content sections */
@@ -929,32 +1027,62 @@ blockquote::before {
    CUSTOM COMPONENTS & UTILITIES
    ============================================================================= */
 
-/* Feature grid for showcasing capabilities */
+/* Feature grid for showcasing capabilities - enhanced for RTD theme */
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--proteus-space-6);
   margin: var(--proteus-space-8) 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive feature grid */
+@media (max-width: 768px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: var(--proteus-space-4);
+    margin: var(--proteus-space-6) 0;
+  }
+
+  .feature-card {
+    margin: 0;
+    padding: var(--proteus-space-4);
+  }
+
+  .wy-nav-content h1:first-child {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .feature-card {
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent for better theme integration */
+  background: rgba(102, 126, 234, 0.05); /* Very light brand background */
   border-radius: var(--proteus-radius-lg);
   padding: var(--proteus-space-6);
-  box-shadow: var(--proteus-shadow);
-  border: 1px solid var(--proteus-gray-200);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
   transition: var(--proteus-transition);
   color: inherit; /* Use RTD theme text color */
+  position: relative;
+  overflow: hidden;
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--proteus-shadow-lg);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
 .feature-card h3 {
   margin-top: 0;
-  color: var(--proteus-primary);
+  color: var(--proteus-primary) !important; /* Ensure brand color shows */
+  font-weight: 700;
 }
 
 /* Performance metrics display */
