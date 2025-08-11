@@ -1,4 +1,29 @@
 /* ProteusJS v2.0.0 Documentation - Enhanced Custom Styles */
+/* Fixed for proper contrast and RTD theme integration */
+
+/* CSS Loading Indicator - helps verify custom CSS is loading */
+body::before {
+  content: "ProteusJS Custom CSS Loaded";
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Ensure proper text contrast for all content */
+.wy-nav-content p,
+.wy-nav-content li,
+.wy-nav-content td,
+.wy-nav-content span {
+  color: inherit !important; /* Force RTD theme text color */
+}
+
+/* Fix any remaining white text issues */
+.wy-nav-content * {
+  color: inherit;
+}
 
 /* CSS Custom Properties for theming */
 :root {
@@ -237,13 +262,13 @@
 
 /* Inline code styling */
 code {
-  background: var(--proteus-gray-100);
-  color: var(--proteus-gray-800);
+  background: rgba(102, 126, 234, 0.1); /* Light brand background */
+  color: inherit; /* Use RTD theme text color */
   padding: var(--proteus-space-1) var(--proteus-space-2);
   border-radius: var(--proteus-radius-sm);
   font-family: var(--proteus-font-mono);
   font-size: 0.9em;
-  border: 1px solid var(--proteus-gray-200);
+  border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
 /* Copy button enhancements */
@@ -275,12 +300,13 @@ code {
 /* Enhanced admonitions with modern design */
 .admonition {
   border-radius: var(--proteus-radius-lg);
-  border: none;
+  border: 1px solid var(--proteus-gray-200);
   box-shadow: var(--proteus-shadow);
   margin: var(--proteus-space-6) 0;
   overflow: hidden;
   position: relative;
-  background: white;
+  /* Use RTD theme background for better contrast */
+  background: inherit;
 }
 
 .admonition::before {
@@ -310,13 +336,13 @@ code {
 }
 
 .admonition-title {
-  background: var(--proteus-gray-50);
-  color: var(--proteus-gray-800);
+  background: rgba(102, 126, 234, 0.1); /* Light brand background */
+  color: inherit; /* Use RTD theme text color */
   padding: var(--proteus-space-4);
   margin: 0;
   font-weight: 600;
   font-family: var(--proteus-font-family);
-  border-bottom: 1px solid var(--proteus-gray-200);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
   display: flex;
   align-items: center;
   gap: var(--proteus-space-2);
@@ -369,7 +395,8 @@ code {
 
 .wy-table-responsive table {
   border: none;
-  background: white;
+  /* Use RTD theme background for tables */
+  background: inherit;
   width: 100%;
 }
 
@@ -382,13 +409,13 @@ code {
 }
 
 .wy-table-responsive table th {
-  background: var(--proteus-gray-50);
-  color: var(--proteus-gray-800);
+  background: rgba(102, 126, 234, 0.1); /* Light brand background */
+  color: inherit; /* Use RTD theme text color */
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85em;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--proteus-gray-300);
+  border-bottom: 2px solid rgba(102, 126, 234, 0.2);
 }
 
 .wy-table-responsive table tr:hover {
@@ -430,7 +457,7 @@ code {
    LINKS & TYPOGRAPHY
    ============================================================================= */
 
-/* Enhanced link styling */
+/* Enhanced link styling - ensure proper contrast */
 a {
   color: var(--proteus-primary);
   text-decoration: none;
@@ -440,7 +467,7 @@ a {
 
 a:hover {
   color: var(--proteus-secondary);
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:not(.btn):not(.reference):hover::after {
@@ -472,17 +499,18 @@ a[href^="http"]:not([href*="proteusjs"]):not([href*="readthedocs"])::after {
   opacity: 0.6;
 }
 
-/* Enhanced typography */
+/* Enhanced typography - preserve RTD theme colors */
 .wy-nav-content {
   font-family: var(--proteus-font-family);
   line-height: 1.7;
-  color: var(--proteus-gray-700);
+  /* Don't override text color - let RTD theme handle it */
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--proteus-font-family);
   font-weight: 700;
-  color: var(--proteus-gray-900);
+  /* Use RTD theme text color for better contrast */
+  color: inherit;
   margin-top: var(--proteus-space-8);
   margin-bottom: var(--proteus-space-4);
   line-height: 1.3;
@@ -610,14 +638,16 @@ h6 {
    CONTENT ENHANCEMENTS
    ============================================================================= */
 
-/* Enhanced content area */
+/* Enhanced content area - fix contrast issues */
 .wy-nav-content {
-  background: white;
+  /* Don't override RTD theme background - let it handle light/dark modes */
   min-height: 100vh;
+  color: inherit; /* Use RTD theme text color */
 }
 
 .wy-nav-content-wrap {
-  background: var(--proteus-gray-50);
+  /* Don't override RTD theme background */
+  background: inherit;
 }
 
 /* Content sections */
@@ -646,12 +676,13 @@ ul li::marker {
 /* Blockquotes */
 blockquote {
   border-left: 4px solid var(--proteus-primary);
-  background: var(--proteus-gray-50);
+  background: rgba(102, 126, 234, 0.05); /* Light transparent background */
   padding: var(--proteus-space-4) var(--proteus-space-6);
   margin: var(--proteus-space-6) 0;
   border-radius: 0 var(--proteus-radius) var(--proteus-radius) 0;
   font-style: italic;
   position: relative;
+  color: inherit; /* Use RTD theme text color */
 }
 
 blockquote::before {
@@ -829,69 +860,28 @@ blockquote::before {
    DARK THEME SUPPORT
    ============================================================================= */
 
+/* Dark theme support - minimal overrides to preserve RTD theme */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --proteus-gray-50: #1e293b;
-    --proteus-gray-100: #334155;
-    --proteus-gray-200: #475569;
-    --proteus-gray-300: #64748b;
-    --proteus-gray-700: #e2e8f0;
-    --proteus-gray-800: #f1f5f9;
-    --proteus-gray-900: #f8fafc;
+  /* Only override brand-specific elements */
+  .wy-nav-top {
+    background: var(--proteus-gradient) !important;
   }
 
-  .wy-nav-side {
-    background: var(--proteus-gray-100);
-    border-right-color: var(--proteus-gray-200);
+  .btn-proteus {
+    background: var(--proteus-gradient) !important;
   }
 
-  .wy-side-nav-search {
-    background: var(--proteus-gray-50);
-    border-bottom-color: var(--proteus-gray-200);
+  .version-badge {
+    background: var(--proteus-gradient) !important;
   }
 
-  .wy-side-nav-search input[type=text] {
-    background: var(--proteus-gray-100);
-    border-color: var(--proteus-gray-200);
-    color: var(--proteus-gray-800);
+  /* Ensure brand colors remain visible in dark mode */
+  h3 {
+    color: var(--proteus-blue-light) !important;
   }
 
-  .wy-nav-content {
-    background: var(--proteus-gray-50);
-    color: var(--proteus-gray-800);
-  }
-
-  .wy-nav-content-wrap {
-    background: var(--proteus-gray-100);
-  }
-
-  .admonition {
-    background: var(--proteus-gray-100);
-  }
-
-  .admonition-title {
-    background: var(--proteus-gray-200);
-    color: var(--proteus-gray-900);
-    border-bottom-color: var(--proteus-gray-300);
-  }
-
-  .wy-table-responsive table {
-    background: var(--proteus-gray-100);
-  }
-
-  .wy-table-responsive table th {
-    background: var(--proteus-gray-200);
-    color: var(--proteus-gray-900);
-  }
-
-  code {
-    background: var(--proteus-gray-200);
-    color: var(--proteus-gray-900);
-    border-color: var(--proteus-gray-300);
-  }
-
-  blockquote {
-    background: var(--proteus-gray-100);
+  .admonition::before {
+    background: var(--proteus-primary) !important;
   }
 }
 
@@ -909,8 +899,9 @@ blockquote::before {
 
   .wy-nav-content {
     margin-left: 0 !important;
-    background: white !important;
-    color: black !important;
+    /* Let RTD theme handle print colors */
+    background: inherit !important;
+    color: inherit !important;
   }
 
   .highlight {
@@ -947,12 +938,13 @@ blockquote::before {
 }
 
 .feature-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent for better theme integration */
   border-radius: var(--proteus-radius-lg);
   padding: var(--proteus-space-6);
   box-shadow: var(--proteus-shadow);
   border: 1px solid var(--proteus-gray-200);
   transition: var(--proteus-transition);
+  color: inherit; /* Use RTD theme text color */
 }
 
 .feature-card:hover {
