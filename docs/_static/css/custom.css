@@ -103,15 +103,9 @@ body::before {
   overflow: hidden;
 }
 
+/* Remove shimmer overlay for clarity and to prevent visual bleed */
 .wy-nav-top::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-  animation: shimmer 3s infinite;
+  content: none;
 }
 
 @keyframes shimmer {
@@ -122,7 +116,7 @@ body::before {
 .wy-nav-top a {
   color: white !important;
   font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: none;
   transition: var(--proteus-transition);
 }
 
@@ -201,26 +195,25 @@ body::before {
 }
 
 .wy-side-nav-search {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  background: #ffffff; /* Solid white for crisp contrast */
   border-bottom: 1px solid var(--proteus-gray-200);
   padding: var(--proteus-space-5) var(--proteus-space-4);
   text-align: center;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 /* Ensure logo is visible and properly sized */
 .wy-side-nav-search a[href="/"] img,
 .wy-side-nav-search a[href="index.html"] img {
-  max-width: 240px; /* Further increased for better visibility */
-  max-height: 80px; /* Increased to match SVG natural height */
+  max-width: 220px;
+  max-height: 72px;
   width: auto;
   height: auto;
   display: block !important;
   margin: 0 auto;
-  filter: drop-shadow(0 3px 6px rgba(102, 126, 234, 0.2)); /* Enhanced shadow */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
+  border: 1px solid rgba(0,0,0,0.06); /* Crisp frame for separation */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.12));
+  background: #ffffff;
 }
 
 /* Force high-quality SVG rendering */
@@ -298,12 +291,12 @@ body::before {
 
 /* Enhanced code blocks with modern styling */
 .highlight {
-  border-radius: var(--proteus-radius-lg);
-  border: 1px solid rgba(102, 126, 234, 0.2);
-  box-shadow: var(--proteus-shadow);
-  overflow: hidden;
+  border-radius: var(--proteus-radius);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: auto;
   position: relative;
-  background: #1e1e1e; /* Dark background for code */
+  background: #0f172a; /* Slate-900 for consistent, readable dark code blocks */
   margin: var(--proteus-space-4) 0;
 }
 
@@ -1242,21 +1235,21 @@ blockquote::before {
 }
 
 .feature-card {
-  background: rgba(102, 126, 234, 0.05); /* Very light brand background */
+  background: #ffffff;
   border-radius: var(--proteus-radius-lg);
   padding: var(--proteus-space-6);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(102, 126, 234, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   transition: var(--proteus-transition);
-  color: inherit; /* Use RTD theme text color */
+  color: inherit;
   position: relative;
   overflow: hidden;
 }
 
 .feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
-  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .feature-card h3 {
