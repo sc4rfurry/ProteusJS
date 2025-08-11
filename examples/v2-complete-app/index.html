@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS v2.0.0 - Complete Application Example</title>
+    <meta name="description" content="Complete example showcasing all ProteusJS v2.0.0 features">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./styles.css" as="style">
+    <link rel="preload" href="./app.js" as="script">
+    
+    <!-- Speculation Rules for intelligent prefetching -->
+    <script type="speculationrules" id="prefetch-rules">
+    {
+      "prerender": [
+        {
+          "where": { "href_matches": "/dashboard*" },
+          "eagerness": "moderate"
+        }
+      ],
+      "prefetch": [
+        {
+          "where": { "href_matches": "/api/*" },
+          "eagerness": "conservative"
+        }
+      ]
+    }
+    </script>
+    
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- App Shell -->
+    <div id="app" class="app-container">
+        <!-- Header with navigation -->
+        <header class="app-header" role="banner">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="app-title">
+                        <span class="logo">🌊</span>
+                        ProteusJS v2.0.0
+                    </h1>
+                    <span class="version-badge">Complete Example</span>
+                </div>
+                
+                <nav class="main-nav" role="navigation" aria-label="Main navigation">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#features" class="nav-link" data-page="features">Features</a></li>
+                        <li><a href="#dashboard" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                        <li><a href="#settings" class="nav-link" data-page="settings">Settings</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <!-- Theme toggle -->
+                    <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">
+                        <span class="icon">🌙</span>
+                    </button>
+                    
+                    <!-- Notifications -->
+                    <button id="notifications-btn" class="icon-button" aria-label="Notifications">
+                        <span class="icon">🔔</span>
+                        <span class="badge" id="notification-badge">3</span>
+                    </button>
+                    
+                    <!-- User menu -->
+                    <button id="user-menu-trigger" class="user-avatar" aria-label="User menu">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" 
+                             alt="User avatar" width="40" height="40">
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main content area -->
+        <main id="main-content" class="main-content" role="main">
+            <!-- Page content will be dynamically loaded here -->
+            <div id="page-container" class="page-container">
+                <!-- Home page (default) -->
+                <section id="home-page" class="page active" data-page="home">
+                    <div class="hero-section">
+                        <h2 class="hero-title">Welcome to ProteusJS v2.0.0</h2>
+                        <p class="hero-subtitle">
+                            Experience the power of modern web platform APIs with enhanced accessibility, 
+                            performance scheduling, and PWA capabilities.
+                        </p>
+                        
+                        <div class="hero-actions">
+                            <button id="get-started-btn" class="btn btn-primary">
+                                Get Started
+                            </button>
+                            <button id="view-demo-btn" class="btn btn-secondary">
+                                View Demo
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card" data-feature="navigation">
+                            <div class="feature-icon">🧭</div>
+                            <h3>Navigation API</h3>
+                            <p>Smooth page transitions with native browser support and intelligent fallbacks.</p>
+                            <button class="feature-demo-btn" data-demo="navigation">Try Demo</button>
+                        </div>
+                        
+                        <div class="feature-card" data-feature="transitions">
+                            <div class="feature-icon">✨</div>
+                            <h3>View Transitions</h3>
+                            <p>Seamless visual transitions between states with the View Transitions API.</p>
+                            <button class="feature-demo-btn" data-demo="transitions">Try Demo</button>
+                        </div>
+                        
+                        <div class="feature-card" data-feature="layer">
+                            <div class="feature-icon">📱</div>
+                            <h3>Layered UI</h3>
+                            <p>Native popover and tooltip functionality with CSS Anchor Positioning.</p>
+                            <button class="feature-demo-btn" data-demo="layer">Try Demo</button>
+                        </div>
+                        
+                        <div class="feature-card" data-feature="schedule">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Performance</h3>
+                            <p>Intelligent task scheduling and performance optimization utilities.</p>
+                            <button class="feature-demo-btn" data-demo="schedule">Try Demo</button>
+                        </div>
+                        
+                        <div class="feature-card" data-feature="pwa">
+                            <div class="feature-icon">🔧</div>
+                            <h3>PWA Features</h3>
+                            <p>File System Access, Badging, Web Share, and OS integration capabilities.</p>
+                            <button class="feature-demo-btn" data-demo="pwa">Try Demo</button>
+                        </div>
+                        
+                        <div class="feature-card" data-feature="speculate">
+                            <div class="feature-icon">🚀</div>
+                            <h3>Prefetching</h3>
+                            <p>Intelligent prefetching with Speculation Rules for faster navigation.</p>
+                            <button class="feature-demo-btn" data-demo="speculate">Try Demo</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Features page -->
+                <section id="features-page" class="page" data-page="features">
+                    <h2>Feature Demonstrations</h2>
+                    <div class="demo-container">
+                        <!-- Demo content will be loaded dynamically -->
+                    </div>
+                </section>
+                
+                <!-- Dashboard page -->
+                <section id="dashboard-page" class="page" data-page="dashboard">
+                    <h2>Performance Dashboard</h2>
+                    <div class="dashboard-grid">
+                        <div class="metric-card">
+                            <h3>Navigation Performance</h3>
+                            <div class="metric-value" id="nav-performance">--</div>
+                            <div class="metric-unit">ms avg</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Transition Performance</h3>
+                            <div class="metric-value" id="transition-performance">--</div>
+                            <div class="metric-unit">ms avg</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>Bundle Size</h3>
+                            <div class="metric-value" id="bundle-size">43</div>
+                            <div class="metric-unit">KB total</div>
+                        </div>
+                        
+                        <div class="metric-card">
+                            <h3>API Support</h3>
+                            <div class="metric-value" id="api-support">--</div>
+                            <div class="metric-unit">% native</div>
+                        </div>
+                    </div>
+                    
+                    <div class="performance-chart">
+                        <h3>Real-time Performance Metrics</h3>
+                        <canvas id="performance-chart" width="800" height="400"></canvas>
+                    </div>
+                </section>
+                
+                <!-- Settings page -->
+                <section id="settings-page" class="page" data-page="settings">
+                    <h2>Application Settings</h2>
+                    <div class="settings-form">
+                        <div class="setting-group">
+                            <label for="theme-setting">Theme</label>
+                            <select id="theme-setting">
+                                <option value="auto">Auto</option>
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="animations-setting">
+                                <input type="checkbox" id="animations-setting" checked>
+                                Enable animations
+                            </label>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="prefetch-setting">
+                                <input type="checkbox" id="prefetch-setting" checked>
+                                Enable intelligent prefetching
+                            </label>
+                        </div>
+                        
+                        <div class="setting-group">
+                            <label for="notifications-setting">
+                                <input type="checkbox" id="notifications-setting" checked>
+                                Enable notifications
+                            </label>
+                        </div>
+                        
+                        <button id="save-settings-btn" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer" role="contentinfo">
+            <div class="footer-content">
+                <p>&copy; 2025 ProteusJS v2.0.0 - Modern Web Platform APIs</p>
+                <div class="footer-links">
+                    <a href="https://github.com/sc4rfurry/ProteusJS" target="_blank" rel="noopener">GitHub</a>
+                    <a href="#" id="share-app-btn">Share App</a>
+                    <a href="#" id="install-app-btn" style="display: none;">Install App</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Popover content (hidden by default) -->
+    <div id="user-menu-popover" class="popover-content" style="display: none;">
+        <div class="user-menu">
+            <div class="user-info">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" 
+                     alt="User avatar" width="60" height="60">
+                <div class="user-details">
+                    <div class="user-name">John Doe</div>
+                    <div class="user-email">john@example.com</div>
+                </div>
+            </div>
+            <hr>
+            <ul class="menu-items">
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#preferences">Preferences</a></li>
+                <li><a href="#help">Help & Support</a></li>
+                <li><hr></li>
+                <li><a href="#logout">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="notifications-popover" class="popover-content" style="display: none;">
+        <div class="notifications-panel">
+            <h3>Notifications</h3>
+            <div class="notification-list">
+                <div class="notification-item">
+                    <div class="notification-icon">🎉</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Welcome to ProteusJS v2.0.0!</div>
+                        <div class="notification-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">⚡</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Performance optimized</div>
+                        <div class="notification-time">1 hour ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">🔄</div>
+                    <div class="notification-content">
+                        <div class="notification-title">App updated to v2.0.0</div>
+                        <div class="notification-time">1 day ago</div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-sm" id="clear-notifications">Clear All</button>
+        </div>
+    </div>
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator" style="display: none;">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
+    
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- Service Worker registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(registration => console.log('SW registered:', registration))
+                .catch(error => console.log('SW registration failed:', error));
+        }
+    </script>
+    
+    <!-- ProteusJS v2.0.0 packages (CDN) -->
+    <script type="module">
+        // In production, these would be loaded from CDN:
+        // import { navigate } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-router@2.0.0/dist/index.esm.js';
+        // import { viewTransition } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-transitions@2.0.0/dist/index.esm.js';
+        // import { popover } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-layer@2.0.0/dist/index.esm.js';
+        // import { postTask } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-schedule@2.0.0/dist/index.esm.js';
+        // import { FileSystem, Share } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-pwa@2.0.0/dist/index.esm.js';
+        // import { prefetch } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-speculate@2.0.0/dist/index.esm.js';
+
+        // For demo purposes, we'll load the local app.js
+        import('./app.js');
+    </script>
+</body>
+</html>

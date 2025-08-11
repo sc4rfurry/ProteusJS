@@ -1,0 +1,62 @@
+{
+  "name": "@sc4rfurryx/proteusjs-transitions",
+  "version": "2.0.0",
+  "description": "View Transitions API helpers and utilities for ProteusJS",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "view-transitions",
+    "transitions",
+    "animations",
+    "cross-document",
+    "spa",
+    "mpa",
+    "proteus",
+    "web-platform"
+  ],
+  "author": "sc4rfurry",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4rfurry/ProteusJS.git",
+    "directory": "packages/transitions"
+  },
+  "bugs": {
+    "url": "https://github.com/sc4rfurry/ProteusJS/issues"
+  },
+  "homepage": "https://github.com/sc4rfurry/ProteusJS/tree/main/packages/transitions",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "rollup": "^4.20.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+

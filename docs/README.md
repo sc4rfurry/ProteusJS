@@ -1,6 +1,6 @@
 # ProteusJS Documentation
 
-Welcome to the ProteusJS documentation! This documentation covers all aspects of using ProteusJS v1.1.1 for native-first web development.
+Welcome to the ProteusJS documentation! This documentation covers all aspects of using ProteusJS v2.0.0 for modern web platform development with breaking changes and new capabilities.
 
 ## 📚 Documentation Structure
 
@@ -24,7 +24,7 @@ Welcome to the ProteusJS documentation! This documentation covers all aspects of
 
 - **NPM Package**: [@sc4rfurryx/proteusjs](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
 - **GitHub Repository**: [sc4rfurry/ProteusJS](https://github.com/sc4rfurry/ProteusJS)
-- **Version**: 1.1.1
+- **Version**: 2.0.0
 - **License**: MIT
 
 ## 📖 Key Documentation Pages
@@ -59,5 +59,5 @@ This documentation is maintained alongside the ProteusJS codebase. For issues or
 
 ---
 
-**ProteusJS v1.1.1** - Native-first web development primitives
+**ProteusJS v2.0.0** - Modern web platform APIs with enhanced capabilities
 © 2025 sc4rfurry - MIT License

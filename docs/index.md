@@ -2,7 +2,7 @@
 
 **Native-first web development primitives for modern applications**
 
-ProteusJS v1.1.1 provides lightweight, tree-shakable modules for view transitions, anchor positioning, container queries, performance optimization, and accessibility patterns.
+ProteusJS v2.0.0 provides modern web platform APIs, enhanced accessibility, performance scheduling, and PWA capabilities with comprehensive migration tools and breaking changes.
 
 ## Quick Start
 
@@ -28,7 +28,7 @@ import { boost } from '@sc4rfurryx/proteusjs/perf';
 {
   "imports": {
     "@sc4rfurryx/proteusjs/transitions": 
-      "https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs@1.1.1/dist/modules/transitions.esm.js"
+      "https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs@2.0.0/dist/modules/transitions.esm.js"
   }
 }
 </script>

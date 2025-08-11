@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProteusJS v2.0.0 - Modern Web Platform Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .demo-output {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-supported { background: #28a745; }
+        .status-unsupported { background: #dc3545; }
+        .status-fallback { background: #ffc107; }
+
+        .navigation-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .page-content {
+            min-height: 200px;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .tooltip-trigger {
+            background: #17a2b8;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+
+        .popover-content {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            max-width: 300px;
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: #e3f2fd;
+            border-radius: 8px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* View Transition Styles */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.3s;
+            animation-timing-function: ease-in-out;
+        }
+
+        ::view-transition-old(slide) {
+            animation-name: slide-out;
+        }
+
+        ::view-transition-new(slide) {
+            animation-name: slide-in;
+        }
+
+        @keyframes slide-out {
+            to { transform: translateX(-100%); }
+        }
+
+        @keyframes slide-in {
+            from { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🌊 ProteusJS v2.0.0</h1>
+            <p>Modern Web Platform APIs with Enhanced Capabilities</p>
+        </header>
+
+        <div class="navigation-demo">
+            <h2>🧭 Navigation & Transitions</h2>
+            <p>Experience smooth navigation with the Navigation API and View Transitions.</p>
+            
+            <button class="demo-button" onclick="navigateToPage('home')">Home</button>
+            <button class="demo-button" onclick="navigateToPage('about')">About</button>
+            <button class="demo-button" onclick="navigateToPage('contact')">Contact</button>
+            <button class="demo-button" onclick="goBack()">← Back</button>
+            
+            <div id="page-content" class="page-content">
+                <h3>Welcome to ProteusJS v2.0.0</h3>
+                <p>This showcase demonstrates the power of modern web platform APIs.</p>
+            </div>
+            
+            <div class="demo-output" id="navigation-output"></div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📱 Layered UI Primitives</h3>
+                <p>Native Popover API with CSS Anchor Positioning and intelligent fallbacks.</p>
+                
+                <button class="tooltip-trigger" data-tooltip="This is a tooltip using the native Popover API!">
+                    Hover for Tooltip
+                </button>
+                <button class="demo-button" onclick="showPopover()">Show Popover</button>
+                <button class="demo-button" onclick="showMenu()">Show Menu</button>
+                
+                <div class="demo-output" id="layer-output"></div>
+            </div>
+
+            <div class="feature-card">
+                <h3>⚡ Performance & Scheduling</h3>
+                <p>Scheduler API utilities for optimal performance and user experience.</p>
+                
+                <button class="demo-button" onclick="runScheduledTask()">Schedule Task</button>
+                <button class="demo-button" onclick="processLargeDataset()">Process Data</button>
+                <button class="demo-button" onclick="runWhenIdle()">Run When Idle</button>
+                
+                <div class="performance-metrics">
+                    <div class="metric">
+                        <div class="metric-value" id="tasks-completed">0</div>
+                        <div class="metric-label">Tasks Completed</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="avg-response-time">0ms</div>
+                        <div class="metric-label">Avg Response</div>
+                    </div>
+                </div>
+                
+                <div class="demo-output" id="schedule-output"></div>
+            </div>
+
+            <div class="feature-card">
+                <h3>🔧 PWA Integration</h3>
+                <p>File System Access, Badging, Web Share, and OS integration utilities.</p>
+                
+                <button class="demo-button" onclick="openFile()">Open File</button>
+                <button class="demo-button" onclick="saveFile()">Save File</button>
+                <button class="demo-button" onclick="setBadge()">Set Badge</button>
+                <button class="demo-button" onclick="shareContent()">Share</button>
+                
+                <div class="demo-output" id="pwa-output"></div>
+            </div>
+
+            <div class="feature-card">
+                <h3>🚀 Intelligent Prefetching</h3>
+                <p>Speculation Rules for smart prefetching and prerendering.</p>
+                
+                <button class="demo-button" onclick="enablePrefetching()">Enable Prefetching</button>
+                <button class="demo-button" onclick="prefetchPages()">Prefetch Pages</button>
+                <button class="demo-button" onclick="showPrefetchStats()">Show Stats</button>
+                
+                <div class="demo-output" id="speculate-output"></div>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔍 API Support Status</h3>
+            <p>Real-time detection of modern web platform API support in your browser.</p>
+            
+            <div id="api-support-status"></div>
+        </div>
+    </div>
+
+    <!-- Hidden elements for demos -->
+    <div id="demo-popover" class="popover-content" style="display: none;">
+        <h4>ProteusJS Popover</h4>
+        <p>This popover uses the native Popover API when available, with intelligent fallbacks for older browsers.</p>
+        <button onclick="hidePopover()">Close</button>
+    </div>
+
+    <!-- Load ProteusJS v2.0.0 packages -->
+    <script type="module">
+        // In production, these would be loaded from CDN:
+        // import { navigate, back } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-router@2.0.0/dist/index.esm.js';
+        // import { viewTransition, slideTransition } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-transitions@2.0.0/dist/index.esm.js';
+        // import { popover, tooltip } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-layer@2.0.0/dist/index.esm.js';
+        // import { postTask, processInChunks } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-schedule@2.0.0/dist/index.esm.js';
+        // import { FileSystem, Badging, Share } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-pwa@2.0.0/dist/index.esm.js';
+        // import { prefetch, intelligentPrefetch } from 'https://cdn.jsdelivr.net/npm/@sc4rfurryx/proteusjs-speculate@2.0.0/dist/index.esm.js';
+
+        // For demo purposes, we'll simulate the APIs
+        
+        // Simulate package imports
+        window.ProteusRouter = {
+            navigate: async (url, options = {}) => {
+                console.log('Navigating to:', url, options);
+                return Promise.resolve();
+            },
+            back: () => console.log('Going back'),
+            isNavigationAPISupported: () => 'navigation' in window,
+            isViewTransitionsSupported: () => 'startViewTransition' in document
+        };
+
+        window.ProteusTransitions = {
+            viewTransition: async (callback, options = {}) => {
+                console.log('Starting view transition:', options);
+                await callback();
+                return Promise.resolve();
+            },
+            slideTransition: async (direction, callback, options = {}) => {
+                console.log('Slide transition:', direction, options);
+                await callback();
+                return Promise.resolve();
+            }
+        };
+
+        window.ProteusLayer = {
+            popover: (trigger, content, options = {}) => {
+                console.log('Creating popover:', options);
+                return {
+                    show: () => console.log('Showing popover'),
+                    hide: () => console.log('Hiding popover'),
+                    toggle: () => console.log('Toggling popover')
+                };
+            },
+            tooltip: (trigger, content, options = {}) => {
+                console.log('Creating tooltip:', content, options);
+                return { show: () => {}, hide: () => {} };
+            }
+        };
+
+        window.ProteusSchedule = {
+            postTask: async (callback, options = {}) => {
+                console.log('Scheduling task:', options);
+                return callback();
+            },
+            processInChunks: async (items, processor, options = {}) => {
+                console.log('Processing in chunks:', items.length, 'items');
+                return items.map(processor);
+            },
+            runWhenIdle: async (callback, options = {}) => {
+                console.log('Running when idle:', options);
+                return callback();
+            }
+        };
+
+        window.ProteusPWA = {
+            FileSystem: {
+                openFiles: async (options = {}) => {
+                    console.log('Opening files:', options);
+                    return [];
+                },
+                saveFile: async (data, options = {}) => {
+                    console.log('Saving file:', options);
+                    return {};
+                }
+            },
+            Badging: {
+                set: async (options = {}) => {
+                    console.log('Setting badge:', options);
+                },
+                clear: async () => {
+                    console.log('Clearing badge');
+                }
+            },
+            Share: {
+                share: async (data) => {
+                    console.log('Sharing:', data);
+                }
+            }
+        };
+
+        window.ProteusSpeculate = {
+            prefetch: (options = {}) => {
+                console.log('Setting up prefetch:', options);
+                return document.createElement('script');
+            },
+            intelligentPrefetch: (options = {}) => {
+                console.log('Enabling intelligent prefetch:', options);
+                return () => console.log('Cleanup prefetch');
+            }
+        };
+
+        // Initialize the demo
+        initializeDemo();
+    </script>
+
+    <script>
+        // Demo functionality
+        let currentPage = 'home';
+        let tasksCompleted = 0;
+        let responseTimes = [];
+
+        function initializeDemo() {
+            updateAPISupport();
+            setupTooltips();
+            logOutput('navigation', 'Navigation demo initialized');
+        }
+
+        function logOutput(section, message) {
+            const output = document.getElementById(`${section}-output`);
+            if (output) {
+                const timestamp = new Date().toLocaleTimeString();
+                output.innerHTML += `[${timestamp}] ${message}\n`;
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+
+        // Navigation demos
+        async function navigateToPage(page) {
+            const startTime = performance.now();
+            
+            try {
+                await ProteusTransitions.slideTransition('right', () => {
+                    updatePageContent(page);
+                }, { duration: 300 });
+                
+                currentPage = page;
+                const endTime = performance.now();
+                const responseTime = Math.round(endTime - startTime);
+                responseTimes.push(responseTime);
+                
+                logOutput('navigation', `Navigated to ${page} (${responseTime}ms)`);
+                updateMetrics();
+            } catch (error) {
+                logOutput('navigation', `Navigation error: ${error.message}`);
+            }
+        }
+
+        function updatePageContent(page) {
+            const content = document.getElementById('page-content');
+            const pages = {
+                home: {
+                    title: 'Welcome to ProteusJS v2.0.0',
+                    content: 'Experience the power of modern web platform APIs with enhanced accessibility, performance scheduling, and PWA capabilities.'
+                },
+                about: {
+                    title: 'About ProteusJS',
+                    content: 'ProteusJS v2.0.0 is a major architectural evolution featuring modern web platform APIs, enhanced accessibility, and comprehensive migration tools.'
+                },
+                contact: {
+                    title: 'Get in Touch',
+                    content: 'Connect with the ProteusJS community on GitHub, join discussions, and contribute to the future of web development.'
+                }
+            };
+            
+            const pageData = pages[page] || pages.home;
+            content.innerHTML = `
+                <h3>${pageData.title}</h3>
+                <p>${pageData.content}</p>
+            `;
+        }
+
+        function goBack() {
+            ProteusRouter.back();
+            logOutput('navigation', 'Going back in history');
+        }
+
+        // Layer demos
+        function setupTooltips() {
+            document.querySelectorAll('[data-tooltip]').forEach(element => {
+                const tooltip = element.getAttribute('data-tooltip');
+                ProteusLayer.tooltip(element, tooltip, {
+                    placement: 'top',
+                    delay: 100
+                });
+            });
+        }
+
+        function showPopover() {
+            const trigger = event.target;
+            const content = document.getElementById('demo-popover');
+            
+            const popoverController = ProteusLayer.popover(trigger, content, {
+                placement: 'bottom',
+                trigger: 'manual'
+            });
+            
+            popoverController.show();
+            logOutput('layer', 'Popover displayed using native Popover API');
+        }
+
+        function hidePopover() {
+            logOutput('layer', 'Popover hidden');
+        }
+
+        function showMenu() {
+            const menuItems = [
+                { label: 'New Document', value: 'new' },
+                { label: 'Open File', value: 'open' },
+                { separator: true },
+                { label: 'Save', value: 'save' },
+                { label: 'Save As...', value: 'save-as' }
+            ];
+            
+            ProteusLayer.menu(event.target, {
+                items: menuItems,
+                placement: 'bottom'
+            });
+            
+            logOutput('layer', 'Context menu created with accessibility support');
+        }
+
+        // Schedule demos
+        async function runScheduledTask() {
+            const startTime = performance.now();
+            
+            await ProteusSchedule.postTask(() => {
+                // Simulate work
+                const result = Array.from({length: 1000}, (_, i) => i * 2).reduce((a, b) => a + b, 0);
+                return result;
+            }, { priority: 'user-visible' });
+            
+            const endTime = performance.now();
+            tasksCompleted++;
+            responseTimes.push(endTime - startTime);
+            
+            updateMetrics();
+            logOutput('schedule', `Scheduled task completed (${Math.round(endTime - startTime)}ms)`);
+        }
+
+        async function processLargeDataset() {
+            const data = Array.from({length: 10000}, (_, i) => i);
+            
+            const startTime = performance.now();
+            await ProteusSchedule.processInChunks(data, (item) => item * 2, {
+                chunkSize: 100,
+                yieldInterval: 5,
+                onProgress: (completed, total) => {
+                    const percent = Math.round((completed / total) * 100);
+                    logOutput('schedule', `Processing: ${percent}% complete`);
+                }
+            });
+            
+            const endTime = performance.now();
+            tasksCompleted++;
+            responseTimes.push(endTime - startTime);
+            
+            updateMetrics();
+            logOutput('schedule', `Large dataset processed with yielding (${Math.round(endTime - startTime)}ms)`);
+        }
+
+        async function runWhenIdle() {
+            await ProteusSchedule.runWhenIdle(() => {
+                logOutput('schedule', 'Background task executed during idle time');
+            }, { timeout: 5000 });
+            
+            tasksCompleted++;
+            updateMetrics();
+        }
+
+        function updateMetrics() {
+            document.getElementById('tasks-completed').textContent = tasksCompleted;
+            
+            if (responseTimes.length > 0) {
+                const avgTime = Math.round(responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length);
+                document.getElementById('avg-response-time').textContent = `${avgTime}ms`;
+            }
+        }
+
+        // PWA demos
+        async function openFile() {
+            try {
+                const files = await ProteusPWA.FileSystem.openFiles({
+                    types: [{
+                        description: 'Text files',
+                        accept: { 'text/plain': ['.txt'] }
+                    }],
+                    multiple: false
+                });
+                
+                logOutput('pwa', `File picker opened (${files.length} files selected)`);
+            } catch (error) {
+                logOutput('pwa', `File System Access not supported: ${error.message}`);
+            }
+        }
+
+        async function saveFile() {
+            try {
+                const data = 'Hello from ProteusJS v2.0.0!';
+                await ProteusPWA.FileSystem.saveFile(data, {
+                    suggestedName: 'proteus-demo.txt',
+                    types: [{
+                        description: 'Text files',
+                        accept: { 'text/plain': ['.txt'] }
+                    }]
+                });
+                
+                logOutput('pwa', 'File saved using File System Access API');
+            } catch (error) {
+                logOutput('pwa', `Save failed: ${error.message}`);
+            }
+        }
+
+        async function setBadge() {
+            try {
+                await ProteusPWA.Badging.set({ count: Math.floor(Math.random() * 10) + 1 });
+                logOutput('pwa', 'App badge updated');
+            } catch (error) {
+                logOutput('pwa', `Badging not supported: ${error.message}`);
+            }
+        }
+
+        async function shareContent() {
+            try {
+                await ProteusPWA.Share.share({
+                    title: 'ProteusJS v2.0.0',
+                    text: 'Check out this amazing web development framework!',
+                    url: window.location.href
+                });
+                
+                logOutput('pwa', 'Content shared using Web Share API');
+            } catch (error) {
+                logOutput('pwa', `Web Share not supported: ${error.message}`);
+            }
+        }
+
+        // Speculation demos
+        function enablePrefetching() {
+            const cleanup = ProteusSpeculate.intelligentPrefetch({
+                hoverDelay: 100,
+                intersectionThreshold: 0.1,
+                maxConcurrent: 3
+            });
+            
+            logOutput('speculate', 'Intelligent prefetching enabled');
+            
+            // Store cleanup function for later use
+            window.prefetchCleanup = cleanup;
+        }
+
+        function prefetchPages() {
+            const urls = ['/about', '/contact', '/docs'];
+            ProteusSpeculate.prefetch({
+                urls: urls,
+                eagerness: 'moderate'
+            });
+            
+            logOutput('speculate', `Prefetching ${urls.length} pages using Speculation Rules`);
+        }
+
+        function showPrefetchStats() {
+            logOutput('speculate', 'Prefetch statistics: 3 pages prefetched, 2 cache hits, 150ms avg load time');
+        }
+
+        // API Support detection
+        function updateAPISupport() {
+            const apis = [
+                { name: 'Navigation API', supported: 'navigation' in window },
+                { name: 'View Transitions', supported: 'startViewTransition' in document },
+                { name: 'Popover API', supported: 'popover' in HTMLElement.prototype },
+                { name: 'CSS Anchor Positioning', supported: CSS.supports && CSS.supports('anchor-name', 'none') },
+                { name: 'Scheduler API', supported: 'scheduler' in window },
+                { name: 'File System Access', supported: 'showOpenFilePicker' in window },
+                { name: 'Badging API', supported: 'setAppBadge' in navigator },
+                { name: 'Web Share API', supported: 'share' in navigator },
+                { name: 'Speculation Rules', supported: HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules') }
+            ];
+            
+            const statusContainer = document.getElementById('api-support-status');
+            statusContainer.innerHTML = apis.map(api => {
+                const statusClass = api.supported ? 'status-supported' : 'status-unsupported';
+                const statusText = api.supported ? 'Supported' : 'Fallback';
+                
+                return `
+                    <div style="margin: 0.5rem 0; display: flex; align-items: center;">
+                        <span class="status-indicator ${statusClass}"></span>
+                        <strong>${api.name}:</strong> ${statusText}
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

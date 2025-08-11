@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/container
  * Container/Style Query helpers with visualization devtools
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */

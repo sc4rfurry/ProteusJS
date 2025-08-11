@@ -1,0 +1,77 @@
+{
+  "name": "@sc4rfurryx/proteusjs-codemods",
+  "version": "2.0.0",
+  "description": "Automated migration tools for upgrading from ProteusJS v1.x to v2.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "proteusjs-migrate": "./bin/migrate.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    },
+    "./transforms": {
+      "types": "./dist/transforms/index.d.ts",
+      "import": "./dist/transforms/index.esm.js"
+    }
+  },
+  "files": [
+    "dist",
+    "bin",
+    "src",
+    "transforms"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "codemod",
+    "migration",
+    "upgrade",
+    "proteus",
+    "ast",
+    "jscodeshift",
+    "babel"
+  ],
+  "author": "sc4rfurry",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4rfurry/ProteusJS.git",
+    "directory": "packages/codemods"
+  },
+  "bugs": {
+    "url": "https://github.com/sc4rfurry/ProteusJS/issues"
+  },
+  "homepage": "https://github.com/sc4rfurry/ProteusJS/tree/main/packages/codemods",
+  "dependencies": {
+    "jscodeshift": "^0.15.1",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "glob": "^10.3.10",
+    "inquirer": "^9.2.12"
+  },
+  "devDependencies": {
+    "@types/jscodeshift": "^0.11.10",
+    "@types/node": "^22.0.0",
+    "rollup": "^4.20.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

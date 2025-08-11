@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/scroll
  * Scroll-driven animations with CSS Scroll-Linked Animations
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */

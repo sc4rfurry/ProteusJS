@@ -4,7 +4,7 @@
  * @sc4rfurryx/proteusjs-cli
  * CLI tools for ProteusJS development
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */
@@ -20,7 +20,7 @@ const program = new Command();
 program
   .name('proteus')
   .description('CLI tools for ProteusJS development')
-  .version('1.1.1');
+  .version('2.0.0');
 
 // proteus init
 program

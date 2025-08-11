@@ -2,7 +2,7 @@
  * ProteusJS - Native-first Web Development Primitives
  * Shape-shifting responsive design that adapts like the sea god himself
  *
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */
@@ -58,5 +58,5 @@ export { isSupported } from './utils/support';
 export type { ProteusPlugin } from './core/PluginSystem';
 
 // Constants
-export const VERSION = '1.1.1';
+export const VERSION = '2.0.0';
 export const LIBRARY_NAME = 'ProteusJS';

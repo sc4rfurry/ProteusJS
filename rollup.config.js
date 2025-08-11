@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const isAnalyze = process.env.ANALYZE === 'true';
 
 const banner = `/*!
- * ProteusJS v${process.env.npm_package_version || '1.1.1'}
+ * ProteusJS v${process.env.npm_package_version || '2.0.0'}
  * Shape-shifting responsive design that adapts like the sea god himself
  * (c) 2025 sc4rfurry
  * Released under the MIT License

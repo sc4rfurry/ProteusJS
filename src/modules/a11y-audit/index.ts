@@ -1,8 +1,8 @@
-﻿/**
+/**
  * @sc4rfurryx/proteusjs/a11y-audit
  * Lightweight accessibility audits for development
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */
@@ -73,7 +73,7 @@ export async function audit(
   };
 
   if (format === 'console' && violations.length > 0) {
-    console.group('🔍 A11y Audit Results');
+    console.group('?? A11y Audit Results');
     violations.forEach(v => console.warn(`${v.impact}: ${v.help}`));
     console.groupEnd();
   }

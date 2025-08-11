@@ -1,8 +1,8 @@
-﻿/**
+/**
  * @sc4rfurryx/proteusjs/a11y-primitives
  * Lightweight accessibility patterns
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */

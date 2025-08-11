@@ -16,8 +16,8 @@ sys.path.insert(0, os.path.abspath('.'))
 # -- Project information -----------------------------------------------------
 
 project = 'ProteusJS'
-copyright = '2025, ProteusJS Team'
-author = 'ProteusJS Team'
+copyright = '2025, sc4rfurry'
+author = 'sc4rfurry'
 
 # The full version, including alpha/beta/rc tags
 release = '1.1.0'

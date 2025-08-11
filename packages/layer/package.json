@@ -1,0 +1,66 @@
+{
+  "name": "@sc4rfurryx/proteusjs-layer",
+  "version": "2.0.0",
+  "description": "Popover API and positioning primitives for ProteusJS",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "popover",
+    "tooltip",
+    "menu",
+    "positioning",
+    "anchor-positioning",
+    "floating-ui",
+    "layered-ui",
+    "proteus",
+    "web-platform"
+  ],
+  "author": "sc4rfurry",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sc4rfurry/ProteusJS.git",
+    "directory": "packages/layer"
+  },
+  "bugs": {
+    "url": "https://github.com/sc4rfurry/ProteusJS/issues"
+  },
+  "homepage": "https://github.com/sc4rfurry/ProteusJS/tree/main/packages/layer",
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "rollup": "^4.20.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4",
+    "eslint": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+

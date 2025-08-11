@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs-vite
  * Vite plugin for ProteusJS development and production optimizations
  * 
- * @version 1.1.1
+ * @version 2.0.0
  * @author sc4rfurry
  * @license MIT
  */
