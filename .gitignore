@@ -102,3 +102,6 @@ yarn.lock
 # Bundle analysis
 bundle-analyzer-report.html
 stats.json
+
+# Rollup cache
+.rollup.cache/

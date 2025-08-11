@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/transitions
  * View Transitions API wrapper with safe fallbacks
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */

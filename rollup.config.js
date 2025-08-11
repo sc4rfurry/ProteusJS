@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const isAnalyze = process.env.ANALYZE === 'true';
 
 const banner = `/*!
- * ProteusJS v${process.env.npm_package_version || '1.1.0'}
+ * ProteusJS v${process.env.npm_package_version || '1.1.1'}
  * Shape-shifting responsive design that adapts like the sea god himself
  * (c) 2025 sc4rfurry
  * Released under the MIT License
@@ -20,17 +20,17 @@ const baseConfig = {
   input: 'src/index.ts',
   external: [],
   plugins: [
-    nodeResolve({
-      browser: true,
-      preferBuiltins: false
-    }),
-    commonjs(),
     typescript({
       tsconfig: './tsconfig.json',
       declaration: false,
       declarationMap: false,
       sourceMap: !isDev
-    })
+    }),
+    nodeResolve({
+      browser: true,
+      preferBuiltins: false
+    }),
+    commonjs()
   ]
 };
 
@@ -129,9 +129,12 @@ const modules = [
 ];
 
 const adapters = [
-  'react',
-  'vue',
-  'svelte'
+  // TODO: Fix TypeScript parsing issues in adapter files
+  // The adapters need to be converted to use JSDoc annotations
+  // or the TypeScript plugin configuration needs to be fixed
+  // 'react',
+  // 'vue',
+  // 'svelte'
 ];
 
 // Build individual modules
@@ -146,17 +149,17 @@ modules.forEach(module => {
       sourcemap: !isDev
     },
     plugins: [
-      nodeResolve({
-        browser: true,
-        preferBuiltins: false
-      }),
-      commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         declaration: false,
         declarationMap: false,
         sourceMap: !isDev
-      })
+      }),
+      nodeResolve({
+        browser: true,
+        preferBuiltins: false
+      }),
+      commonjs()
     ]
   });
 
@@ -185,17 +188,31 @@ adapters.forEach(adapter => {
       sourcemap: !isDev
     },
     plugins: [
-      nodeResolve({
-        browser: true,
-        preferBuiltins: false
-      }),
-      commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         declaration: false,
         declarationMap: false,
-        sourceMap: !isDev
-      })
+        sourceMap: !isDev,
+        outputToFilesystem: true,
+        include: ['src/adapters/**/*.ts'],
+        exclude: ['**/*.test.ts', '**/*.spec.ts'],
+        compilerOptions: {
+          target: 'ES2021',
+          module: 'ESNext',
+          moduleResolution: 'node',
+          allowSyntheticDefaultImports: true,
+          esModuleInterop: true,
+          strict: true,
+          skipLibCheck: true,
+          isolatedModules: true
+        }
+      }),
+      nodeResolve({
+        browser: true,
+        preferBuiltins: false,
+        extensions: ['.ts', '.js']
+      }),
+      commonjs()
     ]
   });
 

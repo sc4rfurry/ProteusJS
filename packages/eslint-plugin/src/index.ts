@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs-eslint-plugin
  * ESLint rules for ProteusJS best practices
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */
@@ -147,7 +147,7 @@ const noUnsafePopover: Rule.RuleModule = {
 const plugin: ESLint.Plugin = {
   meta: {
     name: '@sc4rfurryx/proteusjs-eslint-plugin',
-    version: '1.1.0'
+    version: '1.1.1'
   },
   rules: {
     'no-missing-container-name': noMissingContainerName,

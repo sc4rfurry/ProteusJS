@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/popover
  * HTML Popover API wrapper with robust focus/inert handling
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */

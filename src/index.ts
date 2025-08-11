@@ -2,7 +2,7 @@
  * ProteusJS - Native-first Web Development Primitives
  * Shape-shifting responsive design that adapts like the sea god himself
  *
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */
@@ -47,7 +47,7 @@ export type { PopoverOptions, PopoverController } from './modules/popover';
 export type { ContainerOptions } from './modules/container';
 export type { FluidTypeOptions, FluidTypeResult } from './modules/typography';
 export type { AuditOptions, AuditReport, AuditViolation } from './modules/a11y-audit';
-export type { Controller, DialogOptions, TooltipOptions, ComboboxOptions, ListboxOptions, FocusTrapController } from './modules/a11y-primitives';
+export type { Controller, DialogOptions, TooltipOptions, FocusTrapController } from './modules/a11y-primitives';
 export type { SpeculationOptions, ContentVisibilityOptions } from './modules/perf';
 
 // Utility exports
@@ -58,5 +58,5 @@ export { isSupported } from './utils/support';
 export type { ProteusPlugin } from './core/PluginSystem';
 
 // Constants
-export const VERSION = '1.1.0';
+export const VERSION = '1.1.1';
 export const LIBRARY_NAME = 'ProteusJS';

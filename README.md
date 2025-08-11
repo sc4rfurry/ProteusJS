@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌊 ProteusJS v1.1.0
+# 🌊 ProteusJS v1.1.1
 
 **Native-first web development primitives that adapt like the sea god himself**
 
@@ -20,11 +20,11 @@
 
 ---
 
-## 🚀 **What is ProteusJS v1.1.0?**
+## 🚀 **What is ProteusJS v1.1.1?**
 
-ProteusJS v1.1.0 is a complete architectural transformation - from a monolithic framework to a collection of **native-first, tree-shakable modules** that wrap modern web platform features with great developer experience. Each module is lightweight (≤6KB gzipped), framework-agnostic, and designed for **performance**, **accessibility**, and **modern web standards**.
+ProteusJS v1.1.1 is a complete architectural transformation - from a monolithic framework to a collection of **native-first, tree-shakable modules** that wrap modern web platform features with great developer experience. Each module is lightweight (≤6KB gzipped), framework-agnostic, and designed for **performance**, **accessibility**, and **modern web standards**.
 
-### 🆕 **What's New in v1.1.0**
+### 🆕 **What's New in v1.1.1**
 
 - **🧩 Modular Architecture**: Import only what you need with subpath exports
 - **🌐 Native-First**: Prefer web standards over JavaScript re-implementations
@@ -89,7 +89,7 @@ pnpm add @sc4rfurryx/proteusjs
 <script src="https://unpkg.com/@sc4rfurryx/proteusjs@latest/dist/proteus.min.js"></script>
 ```
 
-### ⚡ **Basic Usage (v1.1.0 Modular API)**
+### ⚡ **Basic Usage (v1.1.1 Modular API)**
 
 ```typescript
 // 🧩 Import only what you need (tree-shakable)
@@ -161,7 +161,7 @@ import { boost } from '@sc4rfurryx/proteusjs/perf';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProteusJS v1.1.0 Demo</title>
+    <title>ProteusJS v1.1.1 Demo</title>
 </head>
 <body>
     <div class="hero-container">

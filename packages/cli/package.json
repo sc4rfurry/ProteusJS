@@ -1,6 +1,6 @@
 {
   "name": "@sc4rfurryx/proteusjs-cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "CLI tools for ProteusJS - scaffolding, audits, and token generation",
   "type": "module",
   "main": "dist/index.js",

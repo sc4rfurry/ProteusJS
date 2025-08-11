@@ -3,12 +3,12 @@
  * Shape-shifting responsive design that adapts like the sea god himself
  */
 
-import type { ProteusConfig, TypographyConfig, LayoutConfig, AccessibilityConfig } from '../types';
-import type { ContainerOptions } from '../containers/SmartContainer';
-import type { SmartContainer } from '../containers/SmartContainer';
-import type { ScalingConfig } from '../typography/ClampScaling';
-import type { ScaleConfig, TypeScale } from '../typography/TypographicScale';
-import type { GridConfig } from '../layout/AdaptiveGrid';
+import { ProteusConfig, TypographyConfig, LayoutConfig, AccessibilityConfig } from '../types';
+import { ContainerOptions } from '../containers/SmartContainer';
+import { SmartContainer } from '../containers/SmartContainer';
+import { ScalingConfig } from '../typography/ClampScaling';
+import { ScaleConfig, TypeScale } from '../typography/TypographicScale';
+import { GridConfig } from '../layout/AdaptiveGrid';
 import { logger } from '../utils/Logger';
 import { EventSystem } from './EventSystem';
 import { PluginSystem } from './PluginSystem';

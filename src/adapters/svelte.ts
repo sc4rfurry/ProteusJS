@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/adapters/svelte
  * Svelte actions and stores for ProteusJS
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */

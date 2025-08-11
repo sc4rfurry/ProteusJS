@@ -1,6 +1,6 @@
 {
   "name": "@sc4rfurryx/proteusjs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "description": "The Modern Web Development Framework for Accessible, Responsive, and High-Performance Applications. Intelligent container queries, fluid typography, WCAG compliance, and performance optimization.",
   "main": "dist/proteus.js",
@@ -89,8 +89,13 @@
     "benchmark": "vitest run tests/benchmarks/performance-benchmark.ts",
     "accessibility": "vitest run tests/validation/accessibility-validation.test.ts",
     "docs:build": "typedoc src/index.ts",
-    "prepublishOnly": "npm run validate && npm run build:prod",
-    "release": "npm run validate && npm run build:prod && npm publish"
+    "prepublishOnly": "npm run build:prod",
+    "release": "npm run validate && npm run build:prod && npm publish",
+    "release:patch": "node scripts/release.js patch",
+    "release:minor": "node scripts/release.js minor",
+    "release:major": "node scripts/release.js major",
+    "release:dry": "node scripts/release.js patch --dry-run",
+    "publish:dev": "node scripts/publish-dev.js"
   },
   "keywords": [
     "responsive",
@@ -124,7 +129,6 @@
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
@@ -137,7 +141,7 @@
     "rollup": "^4.20.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-dts": "^6.1.1",
-    "typescript": "^5.5.0",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
   "engines": {
@@ -150,6 +154,7 @@
     "not ie 11"
   ],
   "dependencies": {
+    "@rollup/plugin-typescript": "^12.1.4",
     "tslib": "^2.8.1"
   }
 }

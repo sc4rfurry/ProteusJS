@@ -2,7 +2,7 @@
  * @sc4rfurryx/proteusjs/anchor
  * CSS Anchor Positioning utilities with robust JS fallback
  * 
- * @version 1.1.0
+ * @version 1.1.1
  * @author sc4rfurry
  * @license MIT
  */
@@ -16,6 +16,7 @@ export interface TetherOptions {
 }
 
 export interface TetherController {
+  update(): void;
   destroy(): void;
 }
 
@@ -247,6 +248,7 @@ export function tether(
   }
 
   return {
+    update: updatePosition,
     destroy
   };
 }
