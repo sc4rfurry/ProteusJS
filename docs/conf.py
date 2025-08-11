@@ -20,8 +20,8 @@ copyright = '2025, sc4rfurry'
 author = 'sc4rfurry'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
-version = '1.1.0'
+release = '2.0.0'
+version = '2.0.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -41,6 +41,7 @@ extensions = [
     'sphinx_copybutton',
     'sphinx_tabs.tabs',
     'myst_parser',
+    'sphinx_design',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,6 +57,26 @@ source_suffix = {
     '.rst': None,
     '.md': 'myst_parser',
 }
+
+# MyST parser configuration
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "substitution",
+    "tasklist",
+]
+
+# MyST parser options
+myst_heading_anchors = 3
+myst_footnote_transition = True
+myst_dmath_double_inline = True
 
 # The master toctree document.
 master_doc = 'index'
@@ -94,15 +115,22 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# Custom CSS files
-html_css_files = [
-    'css/custom.css',
-]
+# Custom CSS files (only if _static directory exists)
+html_css_files = []
+try:
+    import os
+    if os.path.exists(os.path.join(os.path.dirname(__file__), '_static', 'css', 'custom.css')):
+        html_css_files = ['css/custom.css']
+except:
+    pass
 
-# Custom JavaScript files
-html_js_files = [
-    'js/custom.js',
-]
+# Custom JavaScript files (only if _static directory exists)
+html_js_files = []
+try:
+    if os.path.exists(os.path.join(os.path.dirname(__file__), '_static', 'js', 'custom.js')):
+        html_js_files = ['js/custom.js']
+except:
+    pass
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -199,21 +227,7 @@ copybutton_prompt_is_regexp = True
 copybutton_only_copy_prompt_lines = True
 copybutton_remove_prompts = True
 
-# -- Options for MyST parser -------------------------------------------------
-
-myst_enable_extensions = [
-    "amsmath",
-    "colon_fence",
-    "deflist",
-    "dollarmath",
-    "html_admonition",
-    "html_image",
-    "linkify",
-    "replacements",
-    "smartquotes",
-    "substitution",
-    "tasklist",
-]
+# MyST parser extensions already configured above
 
 # -- Custom configuration ----------------------------------------------------
 
@@ -227,9 +241,9 @@ html_context = {
     'source_suffix': source_suffix,
 }
 
-# Logo configuration
-html_logo = '_static/images/logo.png'
-html_favicon = '_static/images/favicon.ico'
+# Logo configuration - Professional SVG logo
+html_logo = '_static/images/logo.svg'
+html_favicon = '_static/images/favicon.svg'
 
 # Social links
 html_theme_options.update({
@@ -259,11 +273,23 @@ html_sidebars = {
 
 def setup(app):
     """Custom setup function for Sphinx."""
-    app.add_css_file('css/custom.css')
-    app.add_js_file('js/custom.js')
-    
+    import os
+
+    # Only add custom files if they exist
+    static_dir = os.path.join(os.path.dirname(__file__), '_static')
+
+    if os.path.exists(os.path.join(static_dir, 'css', 'custom.css')):
+        app.add_css_file('css/custom.css')
+
+    if os.path.exists(os.path.join(static_dir, 'js', 'custom.js')):
+        app.add_js_file('js/custom.js')
+
     # Add custom directives or roles here if needed
-    pass
+    return {
+        'version': '2.0.0',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+    }
 
 # -- SEO and metadata --------------------------------------------------------
 
@@ -277,17 +303,22 @@ html_meta = {
     'og:description': 'Comprehensive documentation for ProteusJS - the modern responsive design library.',
     'og:type': 'website',
     'og:url': 'https://proteusjs.readthedocs.io/',
-    'og:image': 'https://proteusjs.readthedocs.io/_static/images/og-image.png',
+    'og:image': 'https://proteusjs.readthedocs.io/_static/images/og-image.svg',
     'twitter:card': 'summary_large_image',
-    'twitter:title': 'ProteusJS Documentation',
-    'twitter:description': 'Comprehensive documentation for ProteusJS - the modern responsive design library.',
-    'twitter:image': 'https://proteusjs.readthedocs.io/_static/images/twitter-image.png',
+    'twitter:title': 'ProteusJS v2.0.0 Documentation',
+    'twitter:description': 'Native-first web development primitives for modern applications.',
+    'twitter:image': 'https://proteusjs.readthedocs.io/_static/images/og-image.svg',
 }
 
 # -- Build configuration -----------------------------------------------------
 
 # Suppress warnings
-suppress_warnings = ['image.nonlocal_uri']
+suppress_warnings = [
+    'image.nonlocal_uri',
+    'config.cache',
+    'toc.excluded',
+    'misc.highlighting_failure'
+]
 
 # Nitpicky mode
 nitpicky = False

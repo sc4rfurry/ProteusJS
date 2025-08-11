@@ -1,8 +1,42 @@
-# ProteusJS Documentation
+# ProteusJS v2.0.0 Documentation
 
 **Native-first web development primitives for modern applications**
 
 ProteusJS v2.0.0 provides modern web platform APIs, enhanced accessibility, performance scheduling, and PWA capabilities with comprehensive migration tools and breaking changes.
+
+```{toctree}
+:maxdepth: 2
+:caption: Getting Started
+
+getting-started/installation
+getting-started/quick-start
+v2/README
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Core Features
+
+features/container-queries
+features/accessibility
+v2/browser-support
+v2/performance
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: API Reference
+
+api/core-api
+v2/api/README
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: Migration & Guides
+
+v2/migration-guide
+```
 
 ## Quick Start
 

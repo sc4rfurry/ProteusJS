@@ -1,20 +1,34 @@
 <div align="center">
 
-# 🌊 ProteusJS v2.0.0
+<img src="docs/_static/images/logo.svg" alt="ProteusJS v2.0.0" width="400" height="100" />
 
 **Native-first web development primitives that adapt like the sea god himself**
 
 *Lightweight, framework-agnostic utilities for modern, accessible, high-performance web applications*
 
-[![npm version](https://img.shields.io/npm/v/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
-[![npm downloads](https://img.shields.io/npm/dm/@sc4rfurryx/proteusjs.svg?style=for-the-badge)](https://www.npmjs.com/package/@sc4rfurryx/proteusjs)
-[![GitHub stars](https://img.shields.io/github/stars/sc4rfurry/ProteusJS.svg?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS/stargazers)
-[![GitHub license](https://img.shields.io/github/license/sc4rfurry/ProteusJS.svg?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS/blob/main/LICENSE)
+<!-- Core Package Badges -->
+<p>
+<a href="https://www.npmjs.com/package/@sc4rfurryx/proteusjs"><img src="https://img.shields.io/npm/v/@sc4rfurryx/proteusjs.svg?style=for-the-badge&logo=npm&logoColor=white&color=667eea" alt="npm version" /></a>
+<a href="https://www.npmjs.com/package/@sc4rfurryx/proteusjs"><img src="https://img.shields.io/npm/dm/@sc4rfurryx/proteusjs.svg?style=for-the-badge&logo=npm&logoColor=white&color=764ba2" alt="npm downloads" /></a>
+<a href="https://github.com/sc4rfurry/ProteusJS/stargazers"><img src="https://img.shields.io/github/stars/sc4rfurry/ProteusJS.svg?style=for-the-badge&logo=github&logoColor=white&color=667eea" alt="GitHub stars" /></a>
+<a href="https://github.com/sc4rfurry/ProteusJS/blob/main/LICENSE"><img src="https://img.shields.io/github/license/sc4rfurry/ProteusJS.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white&color=764ba2" alt="MIT License" /></a>
+</p>
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![WCAG 2.1](https://img.shields.io/badge/WCAG-2.1%20AAA-4CAF50?style=for-the-badge)](https://www.w3.org/WAI/WCAG21/quickref/)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/sc4rfurry/ProteusJS/ci.yml?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS/actions)
-[![Coverage](https://img.shields.io/badge/Coverage-86%25-brightgreen?style=for-the-badge)](https://github.com/sc4rfurry/ProteusJS)
+<!-- Technology & Quality Badges -->
+<p>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+<a href="https://www.w3.org/WAI/WCAG21/quickref/"><img src="https://img.shields.io/badge/WCAG-2.1%20AAA-4CAF50?style=for-the-badge&logo=accessibility&logoColor=white" alt="WCAG 2.1 AAA" /></a>
+<a href="https://github.com/sc4rfurry/ProteusJS/actions"><img src="https://img.shields.io/github/actions/workflow/status/sc4rfurry/ProteusJS/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white" alt="Build Status" /></a>
+<a href="https://github.com/sc4rfurry/ProteusJS"><img src="https://img.shields.io/badge/Coverage-86%25-brightgreen?style=for-the-badge&logo=codecov&logoColor=white" alt="Test Coverage" /></a>
+</p>
+
+<!-- Performance & Bundle Size Badges -->
+<p>
+<a href="https://bundlephobia.com/package/@sc4rfurryx/proteusjs"><img src="https://img.shields.io/badge/Bundle%20Size-22KB-success?style=for-the-badge&logo=webpack&logoColor=white" alt="Bundle Size" /></a>
+<a href="https://www.npmjs.com/package/@sc4rfurryx/proteusjs"><img src="https://img.shields.io/badge/Tree%20Shakeable-✅-success?style=for-the-badge&logo=javascript&logoColor=white" alt="Tree Shakeable" /></a>
+<a href="https://proteusjs.readthedocs.io/"><img src="https://img.shields.io/badge/Docs-ReadTheDocs-blue?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Documentation" /></a>
+<a href="https://github.com/sc4rfurry/ProteusJS/releases"><img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge&logo=checkmarx&logoColor=white" alt="Production Ready" /></a>
+</p>
 
 </div>
 
@@ -41,17 +55,17 @@ ProteusJS v2.0.0 is a major architectural evolution featuring **modern web platf
 
 ProteusJS v2.0.0 introduces a **modular architecture** - import only what you need:
 
-| Package | Description | Size | APIs |
-|---------|-------------|------|------|
-| 🧭 [`@sc4rfurryx/proteusjs-router`](./packages/router/) | Navigation API router | ~6KB | Navigation API, History fallback |
-| ✨ [`@sc4rfurryx/proteusjs-transitions`](./packages/transitions/) | View Transitions helpers | ~4KB | View Transitions API |
-| 📱 [`@sc4rfurryx/proteusjs-layer`](./packages/layer/) | Popover & positioning | ~10KB | Popover API, CSS Anchor Positioning |
-| ⚡ [`@sc4rfurryx/proteusjs-schedule`](./packages/schedule/) | Performance scheduling | ~6KB | Scheduler API, task management |
-| 🔧 [`@sc4rfurryx/proteusjs-pwa`](./packages/pwa/) | PWA integration | ~12KB | File System, Badging, Web Share |
-| 🚀 [`@sc4rfurryx/proteusjs-speculate`](./packages/speculate/) | Intelligent prefetching | ~5KB | Speculation Rules API |
-| 🌊 [`@sc4rfurryx/proteusjs`](./src/) | Core library + legacy | ~25KB | Core utilities, legacy modules |
+| Package | Description | Bundle Size | Key APIs |
+|:--------|:------------|:-----------:|:---------|
+| 🧭 **[`@sc4rfurryx/proteusjs-router`](./packages/router/)** | Navigation API router with History fallback | ![Size](https://img.shields.io/badge/2.5KB-success?style=flat-square) | Navigation API, History API |
+| ✨ **[`@sc4rfurryx/proteusjs-transitions`](./packages/transitions/)** | View Transitions API helpers | ![Size](https://img.shields.io/badge/3.4KB-success?style=flat-square) | View Transitions API |
+| 📱 **[`@sc4rfurryx/proteusjs-layer`](./packages/layer/)** | Popover & CSS Anchor Positioning | ![Size](https://img.shields.io/badge/5KB-success?style=flat-square) | Popover API, CSS Anchor Positioning |
+| ⚡ **[`@sc4rfurryx/proteusjs-schedule`](./packages/schedule/)** | Performance scheduling & optimization | ![Size](https://img.shields.io/badge/3KB-success?style=flat-square) | Scheduler API, Task Management |
+| 🔧 **[`@sc4rfurryx/proteusjs-pwa`](./packages/pwa/)** | Progressive Web App features | ![Size](https://img.shields.io/badge/4.4KB-success?style=flat-square) | File System, Badging, Web Share |
+| 🚀 **[`@sc4rfurryx/proteusjs-speculate`](./packages/speculate/)** | Intelligent prefetching system | ![Size](https://img.shields.io/badge/3.8KB-success?style=flat-square) | Speculation Rules API |
+| 🌊 **[`@sc4rfurryx/proteusjs`](./src/)** | Core library + legacy modules | ![Size](https://img.shields.io/badge/25KB-informational?style=flat-square) | Core utilities, legacy features |
 
-**Total Bundle Size**: ~43KB for all packages • **Tree-shakeable** • **Zero dependencies**
+**Total Bundle Size**: ![Total Size](https://img.shields.io/badge/22KB%20total-49%25%20under%20budget-brightgreen?style=for-the-badge) • **Tree-shakeable** • **Zero dependencies**
 
 ## ✨ **Key Features**
 

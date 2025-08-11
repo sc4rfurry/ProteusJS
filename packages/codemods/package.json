@@ -54,19 +54,20 @@
   },
   "homepage": "https://github.com/sc4rfurry/ProteusJS/tree/main/packages/codemods",
   "dependencies": {
-    "jscodeshift": "^0.15.1",
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "glob": "^10.3.10",
-    "inquirer": "^9.2.12"
+    "inquirer": "^12.9.1",
+    "jscodeshift": "^0.15.1",
+    "vite": "7.1.1"
   },
   "devDependencies": {
     "@types/jscodeshift": "^0.11.10",
     "@types/node": "^22.0.0",
+    "eslint": "^9.0.0",
     "rollup": "^4.20.0",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4",
-    "eslint": "^9.0.0"
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=18.0.0"
