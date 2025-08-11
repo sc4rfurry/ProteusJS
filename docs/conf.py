@@ -29,19 +29,17 @@ version = '2.0.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',  # Put MyST parser first for proper registration
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
     'sphinx.ext.githubpages',
     'sphinx_copybutton',
     'sphinx_tabs.tabs',
-    'myst_parser',
     'sphinx_design',
+    'sphinx_rtd_theme',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -50,20 +48,20 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = [
+    '_build',
+    'Thumbs.db',
+    '.DS_Store'
+]
 
 # The suffix(es) of source filenames.
-source_suffix = {
-    '.rst': None,
-    '.md': 'myst_parser',
-}
+# Simple format for maximum compatibility
+source_suffix = ['.rst', '.md']
 
-# MyST parser configuration
+# MyST parser configuration - enhanced for Phase 2
 myst_enable_extensions = [
-    "amsmath",
     "colon_fence",
     "deflist",
-    "dollarmath",
     "html_admonition",
     "html_image",
     "linkify",
@@ -73,10 +71,9 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
-# MyST parser options
+# MyST parser options for enhanced functionality
 myst_heading_anchors = 3
 myst_footnote_transition = True
-myst_dmath_double_inline = True
 
 # The master toctree document.
 master_doc = 'index'
@@ -91,8 +88,7 @@ language = 'en'
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  See the documentation for the theme you are using for more info.
+# Enhanced theme options for ProteusJS v2.0.0 branding
 html_theme_options = {
     'canonical_url': 'https://proteusjs.readthedocs.io/',
     'analytics_id': '',  # Add Google Analytics ID if needed
@@ -102,12 +98,15 @@ html_theme_options = {
     'style_external_links': False,
     'vcs_pageview_mode': '',
     'style_nav_header_background': '#667eea',
-    # Toc options
+    # Enhanced navigation options
     'collapse_navigation': True,
     'sticky_navigation': True,
     'navigation_depth': 4,
     'includehidden': True,
-    'titles_only': False
+    'titles_only': False,
+    # ProteusJS branding
+    'github_url': 'https://github.com/sc4rfurry/ProteusJS',
+    'twitter_url': 'https://twitter.com/proteusjs',
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -115,22 +114,9 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# Custom CSS files (only if _static directory exists)
-html_css_files = []
-try:
-    import os
-    if os.path.exists(os.path.join(os.path.dirname(__file__), '_static', 'css', 'custom.css')):
-        html_css_files = ['css/custom.css']
-except:
-    pass
-
-# Custom JavaScript files (only if _static directory exists)
-html_js_files = []
-try:
-    if os.path.exists(os.path.join(os.path.dirname(__file__), '_static', 'js', 'custom.js')):
-        html_js_files = ['js/custom.js']
-except:
-    pass
+# Custom CSS and JS files - re-enabled for visual enhancement
+html_css_files = ['css/custom.css']
+html_js_files = ['js/custom.js']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -241,15 +227,37 @@ html_context = {
     'source_suffix': source_suffix,
 }
 
-# Logo configuration - Professional SVG logo
+# Logo configuration - Professional SVG logo system
 html_logo = '_static/images/logo.svg'
 html_favicon = '_static/images/favicon.svg'
 
-# Social links
-html_theme_options.update({
-    'github_url': 'https://github.com/sc4rfurry/ProteusJS',
-    'twitter_url': 'https://twitter.com/proteusjs',
-})
+# Enhanced HTML context for ProteusJS v2.0.0
+html_context = {
+    'display_github': True,
+    'github_user': 'sc4rfurry',
+    'github_repo': 'ProteusJS',
+    'github_version': 'main',
+    'conf_py_path': '/docs/',
+    'source_suffix': source_suffix,
+    'current_version': '2.0.0',
+    'version_slug': 'v2.0.0',
+    'downloads': [
+        ('PDF', 'https://proteusjs.readthedocs.io/_/downloads/en/latest/pdf/'),
+        ('HTML', 'https://proteusjs.readthedocs.io/_/downloads/en/latest/htmlzip/'),
+        ('Epub', 'https://proteusjs.readthedocs.io/_/downloads/en/latest/epub/'),
+    ],
+}
+
+# Enhanced sidebar configuration
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
 
 # Search configuration
 html_search_language = 'en'
@@ -272,42 +280,64 @@ html_sidebars = {
 # -- Custom functions --------------------------------------------------------
 
 def setup(app):
-    """Custom setup function for Sphinx."""
+    """Enhanced setup function for ProteusJS v2.0.0 visual branding."""
     import os
 
-    # Only add custom files if they exist
+    # Add custom CSS and JS files for visual enhancement
     static_dir = os.path.join(os.path.dirname(__file__), '_static')
 
-    if os.path.exists(os.path.join(static_dir, 'css', 'custom.css')):
+    # Enhanced CSS for professional styling
+    css_file = os.path.join(static_dir, 'css', 'custom.css')
+    if os.path.exists(css_file):
         app.add_css_file('css/custom.css')
+        print("✅ ProteusJS custom CSS loaded")
 
-    if os.path.exists(os.path.join(static_dir, 'js', 'custom.js')):
+    # Enhanced JavaScript for interactive features
+    js_file = os.path.join(static_dir, 'js', 'custom.js')
+    if os.path.exists(js_file):
         app.add_js_file('js/custom.js')
+        print("✅ ProteusJS custom JavaScript loaded")
 
-    # Add custom directives or roles here if needed
+    # Add custom HTML context for branding
+    app.add_html_theme_path = []
+
     return {
         'version': '2.0.0',
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }
 
-# -- SEO and metadata --------------------------------------------------------
+# -- Enhanced SEO and metadata for ProteusJS v2.0.0 -------------------------
 
 html_meta = {
-    'description': 'ProteusJS - Shape-shifting responsive design library with container queries, fluid typography, and accessibility features.',
-    'keywords': 'responsive design, container queries, fluid typography, accessibility, WCAG, CSS, JavaScript, TypeScript',
-    'author': 'ProteusJS Team',
+    'description': 'ProteusJS v2.0.0 - Native-first web development primitives with modern platform APIs, accessibility, and performance optimization.',
+    'keywords': 'web platform apis, navigation api, view transitions, popover api, scheduler api, pwa, accessibility, performance, typescript, javascript',
+    'author': 'sc4rfurry and ProteusJS Team',
     'viewport': 'width=device-width, initial-scale=1.0',
     'robots': 'index, follow',
-    'og:title': 'ProteusJS Documentation',
-    'og:description': 'Comprehensive documentation for ProteusJS - the modern responsive design library.',
+    'theme-color': '#667eea',
+    'msapplication-TileColor': '#667eea',
+    # Open Graph meta tags
+    'og:title': 'ProteusJS v2.0.0 Documentation',
+    'og:description': 'Native-first web development primitives for modern applications with comprehensive API documentation.',
     'og:type': 'website',
     'og:url': 'https://proteusjs.readthedocs.io/',
     'og:image': 'https://proteusjs.readthedocs.io/_static/images/og-image.svg',
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:site_name': 'ProteusJS Documentation',
+    # Twitter Card meta tags
     'twitter:card': 'summary_large_image',
+    'twitter:site': '@ProteusJS',
+    'twitter:creator': '@sc4rfurry',
     'twitter:title': 'ProteusJS v2.0.0 Documentation',
     'twitter:description': 'Native-first web development primitives for modern applications.',
     'twitter:image': 'https://proteusjs.readthedocs.io/_static/images/og-image.svg',
+    # Additional meta tags
+    'application-name': 'ProteusJS Documentation',
+    'apple-mobile-web-app-title': 'ProteusJS Docs',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
 }
 
 # -- Build configuration -----------------------------------------------------

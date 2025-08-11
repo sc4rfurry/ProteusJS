@@ -4,6 +4,46 @@
 
 ProteusJS v2.0.0 provides modern web platform APIs, enhanced accessibility, performance scheduling, and PWA capabilities with comprehensive migration tools and breaking changes.
 
+```{admonition} 🌊 Shape-Shifting Web Development
+:class: tip
+
+ProteusJS adapts to your needs like Proteus, the ancient Greek sea god who could change his shape at will. Our library provides modern web platform APIs with intelligent fallbacks, ensuring your applications work seamlessly across all browsers and devices.
+```
+
+## 🚀 **What's New in v2.0.0**
+
+- **🧭 Navigation API**: Modern routing with History API fallback
+- **✨ View Transitions**: Smooth page transitions with CSS fallbacks
+- **📱 Popover API**: Advanced positioning with CSS Anchor support
+- **⚡ Scheduler API**: Performance optimization with task prioritization
+- **🔧 PWA Features**: File System, Badging, and Web Share APIs
+- **🚀 Speculation Rules**: Intelligent prefetching for faster navigation
+
+<div class="feature-grid">
+
+<div class="feature-card">
+
+### 📦 **Modular Architecture**
+Each package is independently usable with zero dependencies. Mix and match only what you need.
+
+</div>
+
+<div class="feature-card">
+
+### ♿ **Accessibility First**
+WCAG 2.1 AAA compliance built-in with comprehensive screen reader support and keyboard navigation.
+
+</div>
+
+<div class="feature-card">
+
+### ⚡ **Performance Optimized**
+22KB total bundle size (49% under budget) with tree-shaking and modern compression.
+
+</div>
+
+</div>
+
 ```{toctree}
 :maxdepth: 2
 :caption: Getting Started

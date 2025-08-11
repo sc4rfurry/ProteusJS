@@ -1,28 +1,27 @@
 # ReadTheDocs requirements for ProteusJS v2.0.0 documentation
 
-# Core Sphinx - compatible with ReadTheDocs
-sphinx>=6.0.0,<8.0.0
-sphinx-rtd-theme>=1.3.0
-sphinx-copybutton>=0.5.2
-sphinx-tabs>=3.4.1
+# Core Sphinx - stable versions for ReadTheDocs
+sphinx>=6.0.0,<7.0.0
+sphinx-rtd-theme>=1.2.0
+sphinx-copybutton>=0.5.0
+sphinx-tabs>=3.4.0
 
-# Markdown support - MyST parser
-myst-parser>=2.0.0,<4.0.0
-markdown-it-py>=2.2.0
+# Markdown support - MyST parser (stable version)
+myst-parser>=0.18.0,<2.0.0
 
-# Additional extensions
-sphinx-design>=0.5.0
-sphinx-external-toc>=1.0.0
+# Additional extensions for enhanced functionality
+sphinx-design>=0.3.0
+sphinx-external-toc>=0.3.0
 
 # Code highlighting
-Pygments>=2.15.0
+Pygments>=2.12.0
 
 # Documentation utilities
-docutils>=0.18.0
-jinja2>=3.1.0
+docutils>=0.17.0
+jinja2>=3.0.0
 
-# ReadTheDocs specific
-readthedocs-sphinx-ext>=2.2.0
+# ReadTheDocs integration
+readthedocs-sphinx-ext>=2.1.0
 
 # Ensure compatibility
-setuptools>=65.0.0
+setuptools>=60.0.0
