@@ -40,23 +40,92 @@
   margin-top: 20px;
 }
 
-/* CODE BLOCKS - PREVENT OVERSIZING */
+/* CODE BLOCKS - COMPREHENSIVE SYNTAX HIGHLIGHTING FIX */
 .highlight {
-  background: #2d3748 !important;
-  border: 1px solid #ddd !important;
-  border-radius: 4px !important;
-  margin: 15px 0 !important;
-  max-height: 200px !important;
+  background: #1e293b !important; /* Darker slate for better contrast */
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+  margin: 16px 0 !important;
+  max-height: 400px !important;
   overflow: auto !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
 .highlight pre {
   background: transparent !important;
-  color: #e2e8f0 !important;
-  padding: 12px !important;
+  color: #e2e8f0 !important; /* Light gray text */
+  padding: 16px !important;
   margin: 0 !important;
-  font-size: 13px !important;
-  line-height: 1.4 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace !important;
+}
+
+/* Ensure all code text is light colored */
+.highlight pre code,
+.highlight code,
+.highlight span {
+  color: inherit !important;
+  background: transparent !important;
+}
+
+/* Syntax highlighting colors for readability */
+.highlight .k,  /* Keywords */
+.highlight .kn, /* Keyword namespace */
+.highlight .kp, /* Keyword pseudo */
+.highlight .kr, /* Keyword reserved */
+.highlight .kt { /* Keyword type */
+  color: #8b5cf6 !important; /* Purple for keywords */
+}
+
+.highlight .s,  /* Strings */
+.highlight .s1, /* String single */
+.highlight .s2, /* String double */
+.highlight .se, /* String escape */
+.highlight .sh, /* String heredoc */
+.highlight .si, /* String interpolation */
+.highlight .sx { /* String other */
+  color: #10b981 !important; /* Green for strings */
+}
+
+.highlight .c,  /* Comments */
+.highlight .c1, /* Comment single */
+.highlight .cm, /* Comment multiline */
+.highlight .cp, /* Comment preproc */
+.highlight .cs { /* Comment special */
+  color: #6b7280 !important; /* Gray for comments */
+  font-style: italic !important;
+}
+
+.highlight .n,  /* Names */
+.highlight .na, /* Name attribute */
+.highlight .nb, /* Name builtin */
+.highlight .nc, /* Name class */
+.highlight .nd, /* Name decorator */
+.highlight .ne, /* Name exception */
+.highlight .nf, /* Name function */
+.highlight .ni, /* Name entity */
+.highlight .nl, /* Name label */
+.highlight .nn, /* Name namespace */
+.highlight .no, /* Name constant */
+.highlight .nt, /* Name tag */
+.highlight .nv, /* Name variable */
+.highlight .nx { /* Name other */
+  color: #e2e8f0 !important; /* Light gray for names */
+}
+
+.highlight .m,  /* Numbers */
+.highlight .mb, /* Number bin */
+.highlight .mf, /* Number float */
+.highlight .mh, /* Number hex */
+.highlight .mi, /* Number integer */
+.highlight .mo { /* Number oct */
+  color: #f59e0b !important; /* Orange for numbers */
+}
+
+.highlight .o,  /* Operators */
+.highlight .ow { /* Operator word */
+  color: #ec4899 !important; /* Pink for operators */
 }
 
 /* MOBILE RESPONSIVE */
@@ -338,14 +407,108 @@ blockquote {
   line-height: 1.7;
 }
 
-/* Enhanced Code Inline */
-.wy-nav-content code {
-  background: var(--proteus-gray-100);
-  color: var(--proteus-gray-800);
-  padding: 0.2em 0.4em;
-  border-radius: var(--proteus-radius-sm);
-  font-family: var(--proteus-font-mono);
-  font-size: 0.9em;
+/* Enhanced Code Inline - Ensure it doesn't conflict with code blocks */
+.wy-nav-content p code,
+.wy-nav-content li code,
+.wy-nav-content td code,
+.wy-nav-content h1 code,
+.wy-nav-content h2 code,
+.wy-nav-content h3 code,
+.wy-nav-content h4 code,
+.wy-nav-content h5 code,
+.wy-nav-content h6 code {
+  background: var(--proteus-gray-100) !important;
+  color: var(--proteus-gray-800) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: var(--proteus-radius-sm) !important;
+  font-family: var(--proteus-font-mono) !important;
+  font-size: 0.9em !important;
+  border: 1px solid var(--proteus-gray-200) !important;
+}
+
+/* Ensure code blocks override inline code styling */
+.highlight code,
+.highlight pre code,
+.highlight span code {
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Additional ReadTheDocs theme overrides for code blocks */
+.rst-content .highlight {
+  background: #1e293b !important;
+}
+
+.rst-content .highlight pre {
+  color: #e2e8f0 !important;
+  background: transparent !important;
+}
+
+/* Force light text in all code contexts */
+.highlight *,
+.rst-content .highlight *,
+div[class*="highlight"] *,
+pre[class*="highlight"] * {
+  color: #e2e8f0 !important;
+}
+
+/* Specific overrides for common syntax elements */
+.highlight .p { color: #e2e8f0 !important; } /* Punctuation */
+.highlight .w { color: #e2e8f0 !important; } /* Whitespace */
+.highlight .err { color: #ef4444 !important; background: transparent !important; } /* Errors */
+
+/* Language-specific improvements */
+.highlight .language-bash .nb,
+.highlight .language-shell .nb {
+  color: #06b6d4 !important; /* Cyan for bash builtins */
+}
+
+.highlight .language-javascript .nx,
+.highlight .language-js .nx {
+  color: #e2e8f0 !important; /* Light for JS variables */
+}
+
+.highlight .language-python .bp {
+  color: #8b5cf6 !important; /* Purple for Python builtins */
+}
+
+.highlight .language-html .nt {
+  color: #ec4899 !important; /* Pink for HTML tags */
+}
+
+.highlight .language-css .k {
+  color: #06b6d4 !important; /* Cyan for CSS properties */
+}
+
+/* Final fallback - ensure no dark text on dark background */
+.highlight,
+.highlight pre,
+.highlight code,
+.rst-content .highlight,
+.rst-content .highlight pre,
+.rst-content .highlight code {
+  color: #e2e8f0 !important;
+}
+
+/* Override any remaining dark colors */
+.highlight .black,
+.highlight .dark,
+[class*="highlight"] .black,
+[class*="highlight"] .dark {
+  color: #e2e8f0 !important;
+}
+
+/* Ensure proper contrast for all text elements in code blocks */
+.highlight span[style*="color:#000"],
+.highlight span[style*="color:#333"],
+.highlight span[style*="color:#666"],
+.highlight *[style*="color:#000"],
+.highlight *[style*="color:#333"],
+.highlight *[style*="color:#666"] {
+  color: #e2e8f0 !important;
 }
 
 /* Enhanced Links */
